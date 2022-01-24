@@ -2,7 +2,13 @@ package fr;
 
 import fr.insarouen.asi.prog.asiaventure.Monde;
 import fr.insarouen.asi.prog.asiaventure.elements.Entite;
+import fr.insarouen.asi.prog.asiaventure.EtatDuJeu;
+import fr.insarouen.asi.prog.asiaventure.elements.Etat;
 
+import fr.insarouen.asi.prog.asiaventure.elements.objets.Objet ;
+import fr.insarouen.asi.prog.asiaventure.elements.objets.PiedDeBiche;
+
+import fr.insarouen.asi.prog.asiaventure.elements.structure.ElementStructurel ;
 
 public class main{
 	public static void main(String[] args){

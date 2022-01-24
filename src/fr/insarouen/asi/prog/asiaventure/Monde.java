@@ -2,6 +2,7 @@ package fr.insarouen.asi.prog.asiaventure;
 
 import fr.insarouen.asi.prog.asiaventure.elements.Entite;
 
+
 public class Monde{
 	//Attributs
 	private String nomDuMonde;
