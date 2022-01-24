@@ -4,8 +4,8 @@ import fr.insarouen.asi.prog.asiaventure.Monde;
 
 public class Entite{
 	//Attributs
-	String nom;
-	Monde monde;
+	private String nom;
+	private Monde monde;
 	//Constructeur
 	public Entite(String nom, Monde monde){
 		this.nom=nom;
@@ -40,9 +40,5 @@ public class Entite{
 	
 	public int hashCode(){
 		return 2*nom.hashCode()+3*monde.hashCode() ;
-	}
-	//main
-	public static void main(String[] args){
-		
 	}
 }
