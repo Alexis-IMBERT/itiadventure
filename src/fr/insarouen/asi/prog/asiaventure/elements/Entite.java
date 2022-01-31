@@ -2,7 +2,7 @@ package fr.insarouen.asi.prog.asiaventure.elements ;
 
 import fr.insarouen.asi.prog.asiaventure.Monde;
 
-public class Entite{
+public abstract class Entite{
 	//Attributs
 	private String nom;
 	private Monde monde;

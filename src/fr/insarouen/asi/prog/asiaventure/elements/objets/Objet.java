@@ -1,6 +1,6 @@
 package fr.insarouen.asi.prog.asiaventure.elements.objets ;
 
-public class Objet{
+public abstract class Objet{
 	//Attributs
 	private boolean estDeplacable=false;
 	//Methodes

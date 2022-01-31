@@ -1,6 +1,6 @@
 package fr.insarouen.asi.prog.asiaventure.elements.structure ;
 import fr.insarouen.asi.prog.asiaventure.Monde;
-public class ElementStructurel{
+public abstract class ElementStructurel{
 	private String nom;
 	private Monde monde;
 	
