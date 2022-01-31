@@ -1,11 +1,10 @@
 package fr.insarouen.asi.prog.asiaventure.elements.structure ;
+
 import fr.insarouen.asi.prog.asiaventure.Monde;
-public abstract class ElementStructurel{
-	private String nom;
-	private Monde monde;
-	
+import fr.insarouen.asi.prog.asiaventure.elements.Entite;
+
+public abstract class ElementStructurel extends Entite{
 	public ElementStructurel(String nom, Monde monde){
-		this.monde = monde;
-		this.nom = nom;
+		super(nom,monde);
 	}
 }
