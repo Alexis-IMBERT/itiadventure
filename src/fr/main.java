@@ -12,6 +12,8 @@ import fr.insarouen.asi.prog.asiaventure.elements.structure.ElementStructurel ;
 
 import fr.insarouen.asi.prog.asiaventure.elements.structure.Piece;
 
+import fr.insarouen.asi.prog.asiaventure.elements.vivants.Vivant;
+
 public class main{
 	public static void main(String[] args){
 		//TP02
