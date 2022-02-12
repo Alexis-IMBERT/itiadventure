@@ -3,15 +3,37 @@ package fr.insarouen.asi.prog.asiaventure.elements.structure;
 import fr.insarouen.asi.prog.asiaventure.Monde;
 import fr.insarouen.asi.prog.asiaventure.elements.objets.Objet ;
 import fr.insarouen.asi.prog.asiaventure.elements.vivants.Vivant;
+
+/**
+ * Classe Pièce basé sur la classe abstraite ElementStructurel
+ * @see ElementStructurel
+ */
 public class Piece extends ElementStructurel{
 	//Attributs
+	/**
+	 * Attribut de la classe : liste d'objet présent dans la pièce initialisé à vide.
+	 */
 	Objet[] objets = new Objet[0];
+	/**
+	 * Attribut de la classe : liste de vivant présent dans la pièce initialisé à vide.
+	 */
 	Vivant[] vivants = new Vivant[0];
 	//Constructeur
+	/**
+	 * Constructeur d'une pièce
+	 * @see ElementStructurel
+	 * @param nom chaine de caractère désignant l'élément
+	 * @param monde monde de type Monde auquel appartient l'élément structurel
+	 */
 	public Piece(String nom, Monde monde){
 		super(nom,monde);
 	}
 	//methodes
+	/**
+	 * Méthode vérifiant la présence d'un objet dans la pièce
+	 * @param objet : l'objet que l'on recherche
+	 * @return boolean true : est présent dans la pièce, false : n'est pas présent
+	 */
 	public boolean contientObjet(Objet objet){
 		int taille = objets.length;
 		int i = 0;
@@ -25,6 +47,11 @@ public class Piece extends ElementStructurel{
 		return res;
 	}
 	
+	/**
+	 * Méthode vérifiant la présence d'un objet dans la pièce
+	 * @param nomObj : chaine de caractère désignant l'objet que l'on recherche
+	 * @return boolean true : est présent dans la pièce, false : n'est pas présent
+	 */
 	public boolean contientObjet(String nomObj){
 		int taille = objets.length;
 		int i = 0;
@@ -37,7 +64,11 @@ public class Piece extends ElementStructurel{
 		}
 		return res;
 	}
-	
+
+	/**
+	 * Permet de déposer un objet dans une pièce
+	 * @param obj Objet que l'on souhaite déposer dans la pièce
+	 */
 	public void deposer(Objet obj){
 		int taille = objets.length;
 		Objet[] newObjets = new Objet[taille+1];
@@ -49,10 +80,19 @@ public class Piece extends ElementStructurel{
 		this.objets = newObjets ;
 	}
 	
+	/**
+	 * Permet de récupérer la liste d'objet de la pièce
+	 * @return la liste des objets de la pièce
+	 */
 	public Objet[] getObjets(){
 		return objets;
 	}
 	
+	/**
+	 * Permet de retirer un objet de la pièce
+	 * @param obj Objet que l'on souhaite retirer de la liste
+	 * @return retourne l'objet à retirer
+	 */
 	public Objet retirer(Objet obj){
 		int taille = objets.length;
 		int i=0;
@@ -72,6 +112,11 @@ public class Piece extends ElementStructurel{
 		return res;
 	}
 	
+	/**
+	 * Permet de retirer un objet de la pièce grace à la chaine de caractère le désignant.
+	 * @param nomObj : chaine de caractère désignant l'objet
+	 * @return l'objet à retirer
+	 */
 	public Objet retirer(String nomObj){
 		int taille = objets.length;
 		int i=0;
@@ -91,6 +136,11 @@ public class Piece extends ElementStructurel{
 		return res;
 	}
 	
+	/**
+	 * Vérifie la présence d'un vivant dans la pièce
+	 * @param vivant Vivant que l'on recherche dans la pièce
+	 * @return boolean : true = est présent dans la pièce, false sinon.
+	 */
 	public boolean contientVivant(Vivant vivant){
 		int taille = vivants.length;
 		int i=0;
@@ -104,6 +154,11 @@ public class Piece extends ElementStructurel{
 		return estPresent;
 	}
 	
+	/**
+	 * Recherche la présence d'un vivant dans la pièce grace à la chaine de caractère le désignant
+	 * @param nomVivant : chaine de caractère désignant le vivant
+	 * @return boolean : true = est présent dans la pièce, false sinon.
+	 */
 	public boolean contientVivant(String nomVivant){
 		int taille = vivants.length;
 		int i=0;
@@ -117,6 +172,10 @@ public class Piece extends ElementStructurel{
 		return estPresent;
 	}
 	
+	/**
+	 * Fait entré un vivant dans la pièce (ajoute le vivant dans la pièce)
+	 * @param vivant vivant à faire rentrer
+	 */
 	public void entrer(Vivant vivant){
 		int taille = vivants.length;
 		Vivant[] newVivants = new Vivant[taille+1];
@@ -128,10 +187,18 @@ public class Piece extends ElementStructurel{
 		vivants = newVivants;
 	}
 	
+	/**
+	 * @return la liste des vivants contenue dans la pièce
+	 */
 	public Vivant[] getVivant(){
 		return this.vivants;
 	}
 	
+	/**
+	 * Fais sortir un vivant de la pièce (retire le vivant de la pièce)
+	 * @param vivant vivant à retirer de la pièce
+	 * @return le vivant en question
+	 */
 	public Vivant sortirVivant(Vivant vivant){
 		int taille = vivants.length;
 		int i=0;
@@ -150,6 +217,12 @@ public class Piece extends ElementStructurel{
 		this.vivants = newVivants ;
 		return res;
 	}
+
+	/**
+	 * Sort un vivant de la pièce (le retire de la pièce) grace à la chaine de caractère le désignant
+	 * @param nomVivant chaine de caractère désignant le vivant
+	 * @return le vivant en question
+	 */
 	public Vivant sortirVivants(String nomVivant){
 		int taille = vivants.length;
 		int i=0;
