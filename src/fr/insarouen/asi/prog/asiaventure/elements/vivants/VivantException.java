@@ -4,7 +4,7 @@ public class VivantException extends ASIAventureException{
 	public VivantException(){
 		super();
 	}
-	public VivantException(){
-		super();
+	public VivantException(String msg){
+		super(msg);
 	}
 }
