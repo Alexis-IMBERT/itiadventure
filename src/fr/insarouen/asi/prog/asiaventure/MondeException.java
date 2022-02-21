@@ -1,4 +1,4 @@
-package fr.insarouen.asi.prog.asiaventure
+package fr.insarouen.asi.prog.asiaventure;
 
 /**
 *@throws création du type d'exceptions de MondeException
