@@ -25,7 +25,7 @@ public class Piece extends ElementStructurel{
 	 * @param nom chaine de caractère désignant l'élément
 	 * @param monde monde de type Monde auquel appartient l'élément structurel
 	 */
-	public Piece(String nom, Monde monde){
+	public Piece(String nom, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException{
 		super(nom,monde);
 	}
 	//methodes
@@ -93,7 +93,7 @@ public class Piece extends ElementStructurel{
 	 * @param obj Objet que l'on souhaite retirer de la liste
 	 * @return retourne l'objet à retirer
 	 */
-	public Objet retirer(Objet obj){
+	public Objet retirer(Objet obj) throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException{
 		int taille = objets.length;
 		int i=0;
 		int j=0;
@@ -108,6 +108,13 @@ public class Piece extends ElementStructurel{
 				res = this.objets[i];
 			}
 		}
+		if (res==null){
+			e = new ObjetAbsentDeLaPieceException();
+			throw e;
+		}
+		if(!res.estDeplacable()){
+			throw e2 = new ObjetNonDeplacableException();
+		}
 		this.objets = newObjets ;
 		return res;
 	}
@@ -117,7 +124,7 @@ public class Piece extends ElementStructurel{
 	 * @param nomObj : chaine de caractère désignant l'objet
 	 * @return l'objet à retirer
 	 */
-	public Objet retirer(String nomObj){
+	public Objet retirer(String nomObj) throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException{
 		int taille = objets.length;
 		int i=0;
 		int j=0;
@@ -131,6 +138,13 @@ public class Piece extends ElementStructurel{
 			else {
 				res = this.objets[i];
 			}
+		}
+		if (res==null){
+			e = new ObjetAbsentDeLaPieceException();
+			throw e;
+		}
+		if(!res.estDeplacable()){
+			throw e2 = new ObjetNonDeplacableException();
 		}
 		this.objets = newObjets ;
 		return res;
@@ -199,7 +213,7 @@ public class Piece extends ElementStructurel{
 	 * @param vivant vivant à retirer de la pièce
 	 * @return le vivant en question
 	 */
-	public Vivant sortirVivant(Vivant vivant){
+	public Vivant sortirVivant(Vivant vivant) throws VivantAbsentDeLaPieceException{
 		int taille = vivants.length;
 		int i=0;
 		int j=0;
@@ -214,6 +228,9 @@ public class Piece extends ElementStructurel{
 				res = this.vivants[i];
 			}
 		}
+		if(res==null){
+			throw e = new VivantAbsentDeLaPieceException();
+		}
 		this.vivants = newVivants ;
 		return res;
 	}
@@ -223,7 +240,7 @@ public class Piece extends ElementStructurel{
 	 * @param nomVivant chaine de caractère désignant le vivant
 	 * @return le vivant en question
 	 */
-	public Vivant sortirVivants(String nomVivant){
+	public Vivant sortirVivants(String nomVivant) throws VivantAbsentDeLaPieceException{
 		int taille = vivants.length;
 		int i=0;
 		int j=0;
@@ -238,28 +255,10 @@ public class Piece extends ElementStructurel{
 				res = this.vivants[i];
 			}
 		}
+		if(res==null){
+			throw e = new VivantAbsentDeLaPieceException();
+		}
 		this.vivants = newVivants ;
 		return res;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

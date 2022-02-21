@@ -12,7 +12,7 @@ public abstract class ElementStructurel extends Entite{
 	 * @param nom chaine de caractère désignant l'élément
 	 * @param monde monde de type Monde auquel appartient l'élément structurel
 	 */
-	public ElementStructurel(String nom, Monde monde){
+	public ElementStructurel(String nom, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException{
 		super(nom,monde);
 	}
 }
