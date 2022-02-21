@@ -1,12 +1,12 @@
-package fr.insarouen.asi.prog.asiaventure.elements.structure.VivantAbsentDeLaPieceException;
+package fr.insarouen.asi.prog.asiaventure.elements.structure;
 
 public class VivantAbsentDeLaPieceException extends PieceException{
 	//Constructeur
-	puclic VivantAbsentDeLaPieceException(){
+	public VivantAbsentDeLaPieceException(){
 		super();
 	}
 	
-	puclic VivantAbsentDeLaPieceException(String msg){
+	public VivantAbsentDeLaPieceException(String msg){
 		super(msg);
 	}
 }
