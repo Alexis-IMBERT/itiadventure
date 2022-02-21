@@ -13,11 +13,11 @@ public class Piece extends ElementStructurel{
 	/**
 	 * Attribut de la classe : liste d'objet présent dans la pièce initialisé à vide.
 	 */
-	Objet[] objets = new Objet[0];
+	private Objet[] objets = new Objet[0];
 	/**
 	 * Attribut de la classe : liste de vivant présent dans la pièce initialisé à vide.
 	 */
-	Vivant[] vivants = new Vivant[0];
+	private Vivant[] vivants = new Vivant[0];
 	//Constructeur
 	/**
 	 * Constructeur d'une pièce
