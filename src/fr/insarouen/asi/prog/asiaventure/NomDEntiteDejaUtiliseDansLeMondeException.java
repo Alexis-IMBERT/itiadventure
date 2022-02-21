@@ -18,7 +18,7 @@ public class NomDEntiteDejaUtiliseDansLeMondeException extends MondeException{
 	
 	/**
 	* Constructeur de l'exception de type NomDEntiteDejaUtiliseDansLeMondeException qui hérite de MondeException
-	*@param msg Chaine de caractère désignant omDEntiteDejaUtiliseDansLeMondeException
+	*@param msg Chaine de caractère désignant NomDEntiteDejaUtiliseDansLeMondeException
 	*/
 
 	private NomDEntiteDejaUtiliseDansLeMondeException(String msg){
