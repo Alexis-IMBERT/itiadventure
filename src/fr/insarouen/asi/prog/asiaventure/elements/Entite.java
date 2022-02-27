@@ -5,7 +5,6 @@ import fr.insarouen.asi.prog.asiaventure.Monde;
 /**
  * Classe abstraite servant à la construction des entités du jeux
 */
-
 public abstract class Entite{
 
 	//Attributs

@@ -1,7 +1,9 @@
 package fr.insarouen.asi.prog.asiaventure.elements.structure;
 
 import fr.insarouen.asi.prog.asiaventure.Monde;
+import fr.insarouen.asi.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 import fr.insarouen.asi.prog.asiaventure.elements.objets.Objet ;
+import fr.insarouen.asi.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
 import fr.insarouen.asi.prog.asiaventure.elements.vivants.Vivant;
 
 /**
@@ -109,10 +111,11 @@ public class Piece extends ElementStructurel{
 			}
 		}
 		if (res==null){
-			e = new ObjetAbsentDeLaPieceException();
+			ObjetAbsentDeLaPieceException e = new ObjetAbsentDeLaPieceException();
 			throw e;
 		}
 		if(!res.estDeplacable()){
+			ObjetNonDeplacableException e2;
 			throw e2 = new ObjetNonDeplacableException();
 		}
 		this.objets = newObjets ;
@@ -140,10 +143,11 @@ public class Piece extends ElementStructurel{
 			}
 		}
 		if (res==null){
-			e = new ObjetAbsentDeLaPieceException();
+			ObjetAbsentDeLaPieceException e = new ObjetAbsentDeLaPieceException();
 			throw e;
 		}
 		if(!res.estDeplacable()){
+			ObjetNonDeplacableException e2;
 			throw e2 = new ObjetNonDeplacableException();
 		}
 		this.objets = newObjets ;
@@ -229,6 +233,7 @@ public class Piece extends ElementStructurel{
 			}
 		}
 		if(res==null){
+			VivantAbsentDeLaPieceException e;
 			throw e = new VivantAbsentDeLaPieceException();
 		}
 		this.vivants = newVivants ;
@@ -256,6 +261,7 @@ public class Piece extends ElementStructurel{
 			}
 		}
 		if(res==null){
+			VivantAbsentDeLaPieceException e;
 			throw e = new VivantAbsentDeLaPieceException();
 		}
 		this.vivants = newVivants ;

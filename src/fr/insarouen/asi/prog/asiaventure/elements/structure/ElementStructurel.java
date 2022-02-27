@@ -1,6 +1,7 @@
 package fr.insarouen.asi.prog.asiaventure.elements.structure ;
 
 import fr.insarouen.asi.prog.asiaventure.Monde;
+import fr.insarouen.asi.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 import fr.insarouen.asi.prog.asiaventure.elements.Entite;
 /**
  * @author Alexis IMBERT et Mehdi Saissi Hassani

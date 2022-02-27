@@ -3,6 +3,8 @@ package fr.insarouen.asi.prog.asiaventure.elements.vivants;
 import fr.insarouen.asi.prog.asiaventure.Monde;
 import fr.insarouen.asi.prog.asiaventure.elements.Entite;
 import fr.insarouen.asi.prog.asiaventure.elements.objets.Objet;
+import fr.insarouen.asi.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
+import fr.insarouen.asi.prog.asiaventure.elements.structure.ObjetAbsentDeLaPieceException;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.Piece;
 /**
  * classe abstraite désignant un vivant
@@ -187,8 +189,10 @@ public abstract class Vivant extends Entite{
 	/**
 	 * Prend l'objet l'objet présent dans la pièce et l'ajoute dans l'inventaire du vivant
 	 * @param nomObj
+	 * @throws ObjetNonDeplacableException
+	 * @throws ObjetAbsentDeLaPieceException
 	 */
-	public void prendre(String nomObj){
+	public void prendre(String nomObj) throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException{
 		int taille = objets.length;
 		int i=0;
 		Objet objet = this.getPiece().retirer(nomObj);
