@@ -1,6 +1,7 @@
 package fr.insarouen.asi.prog.asiaventure.elements.vivants;
 
 import fr.insarouen.asi.prog.asiaventure.Monde;
+import fr.insarouen.asi.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 import fr.insarouen.asi.prog.asiaventure.elements.Entite;
 import fr.insarouen.asi.prog.asiaventure.elements.objets.Objet;
 import fr.insarouen.asi.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
@@ -40,8 +41,9 @@ public abstract class Vivant extends Entite{
 	 * @param pointForce Entier naturel désignant le nombre de point de force du vivant
 	 * @param piece pièce dans laquelle se trouve le vivant
 	 * @param objets liste d'objet que possède le vivant sur lui
+	 * @throws NomDEntiteDejaUtiliseDansLeMondeException
 	 */
-	public Vivant(String nom, Monde monde, int pointVie, int pointForce, Piece piece, Objet... objets){
+	public Vivant(String nom, Monde monde, int pointVie, int pointForce, Piece piece, Objet... objets) throws NomDEntiteDejaUtiliseDansLeMondeException{
 		super(nom,monde);
 		this.pointVie = pointVie;
 		this.pointForce = pointForce;

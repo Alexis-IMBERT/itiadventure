@@ -1,6 +1,7 @@
 package fr.insarouen.asi.prog.asiaventure.elements ;
 
 import fr.insarouen.asi.prog.asiaventure.Monde;
+import fr.insarouen.asi.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 
 /**
  * Classe abstraite servant à la construction des entités du jeux

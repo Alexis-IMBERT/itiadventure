@@ -115,8 +115,8 @@ public class Piece extends ElementStructurel{
 			throw e;
 		}
 		if(!res.estDeplacable()){
-			ObjetNonDeplacableException e2;
-			throw e2 = new ObjetNonDeplacableException();
+			ObjetNonDeplacableException e2 = new ObjetNonDeplacableException();
+			throw e2;
 		}
 		this.objets = newObjets ;
 		return res;
@@ -147,8 +147,8 @@ public class Piece extends ElementStructurel{
 			throw e;
 		}
 		if(!res.estDeplacable()){
-			ObjetNonDeplacableException e2;
-			throw e2 = new ObjetNonDeplacableException();
+			ObjetNonDeplacableException e2 = new ObjetNonDeplacableException();
+			throw e2;
 		}
 		this.objets = newObjets ;
 		return res;
@@ -233,8 +233,8 @@ public class Piece extends ElementStructurel{
 			}
 		}
 		if(res==null){
-			VivantAbsentDeLaPieceException e;
-			throw e = new VivantAbsentDeLaPieceException();
+			VivantAbsentDeLaPieceException e = new VivantAbsentDeLaPieceException();
+			throw e;
 		}
 		this.vivants = newVivants ;
 		return res;
@@ -261,8 +261,8 @@ public class Piece extends ElementStructurel{
 			}
 		}
 		if(res==null){
-			VivantAbsentDeLaPieceException e;
-			throw e = new VivantAbsentDeLaPieceException();
+			VivantAbsentDeLaPieceException e = new VivantAbsentDeLaPieceException();
+			throw e;
 		}
 		this.vivants = newVivants ;
 		return res;
