@@ -13,8 +13,9 @@ public class PieceException extends ElementStructurelException{
 	}
 	
 	/**
-	* Constructeur de l'exception de type PieceException avec une chaine de caractère (un message) donné en paramètre qui hérite de ElementStructurelException
-	*/
+	 * Constructeur de l'exception de type PieceException avec une chaine de caractère (un message) donné en paramètre qui hérite de ElementStructurelException
+	 * @param msg message passé en paramètre
+	 */
 	public PieceException(java.lang.String msg){
 		super(msg);
 	}
