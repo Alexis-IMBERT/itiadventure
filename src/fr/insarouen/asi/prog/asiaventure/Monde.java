@@ -70,7 +70,7 @@ public class Monde{
 			throw e2;
 		}
 		for(i=0;i<taille;i++){
-			if (!this.entites[i].equals(entite)){
+			if (!this.entites[i].getNom().equals(entite.getNom())){
 				tmp[i]=this.entites[i];
 			}
 			else{
