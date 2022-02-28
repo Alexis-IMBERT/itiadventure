@@ -7,6 +7,7 @@ import fr.insarouen.asi.prog.asiaventure.elements.objets.Objet;
 import fr.insarouen.asi.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.ObjetAbsentDeLaPieceException;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.Piece;
+import fr.insarouen.asi.prog.asiaventure.elements.vivants.ObjetNonPossedeParLeVivantException;
 /**
  * classe abstraite désignant un vivant
  */
@@ -56,7 +57,7 @@ public abstract class Vivant extends Entite{
 	 * Le vivant dépose un objet qu'il a en sa possesion (implique le retrait de l'objet dans sa liste d'objet)
 	 * @param objet objet à déposer
 	 */
-	public void deposer(Objet objet){
+	public void deposer(Objet objet) throws ObjetNonPossedeParLeVivantException{
 		int taille = objets.length;
 		Objet[] newObjets = new Objet[taille-1];
 		int i=0;
@@ -74,7 +75,7 @@ public abstract class Vivant extends Entite{
 	 * Dépose un objet en possesion du vivant grace à la chaine de caractère le désignant (implique le retrait de l'objet dans la liste des objet possédé par le vivant) 
 	 * @param nomObj chaine de caratère désignant l'objet que l'on souhaite retirer
 	 */
-	public void deposer(String nomObj){
+	public void deposer(String nomObj) throws ObjetNonPossedeParLeVivantException{
 		int taille = objets.length;
 		Objet[] newObjets = new Objet[taille-1];
 		int i=0;
@@ -178,12 +179,26 @@ public abstract class Vivant extends Entite{
 	 * Le vivant prend un objet de la pièce où il se trouve (ajoute l'objet dans la liste des objets présent dans l'inventaire du vivant et donc le retire de la liste des objet présent dans la pièce)
 	 * @param objet objet en question
 	 */
-	public void prendre(Objet objet){
+	public void prendre(Objet objet) throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException{
 		int taille = objets.length;
 		int i=0;
 		Objet[] newObjets = new Objet[taille+1];
+		Objet res=null;
 		for (i=0;i<taille;i++){
-			newObjets[i] = objets[i];
+			if (!objets[i].equals(objet)){
+				newObjets[i] = objets[i];
+			}
+			else {
+				res = this.objets[i];
+			}
+		}
+		if (res==null){
+			ObjetAbsentDeLaPieceException e = new ObjetAbsentDeLaPieceException();
+			throw e;
+		}
+		if(!res.estDeplacable()){
+			ObjetNonDeplacableException e2 = new ObjetNonDeplacableException();
+			throw e2;
 		}
 		newObjets[taille] = objet;
 		objets = newObjets;
@@ -199,8 +214,17 @@ public abstract class Vivant extends Entite{
 		int i=0;
 		Objet objet = this.getPiece().retirer(nomObj);
 		Objet[] newObjets = new Objet[taille+1];
+		Objet res=null;
 		for (i=0;i<taille;i++){
 			newObjets[i] = objets[i];
+		}
+		if (res==null){
+			ObjetAbsentDeLaPieceException e = new ObjetAbsentDeLaPieceException();
+			throw e;
+		}
+		if(!res.estDeplacable()){
+			ObjetNonDeplacableException e2 = new ObjetNonDeplacableException();
+			throw e2;
 		}
 		newObjets[taille] = objet;
 		objets = newObjets;
