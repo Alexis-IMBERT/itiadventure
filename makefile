@@ -1,14 +1,11 @@
-all : delete tests
+all : clean prog tests
 
-delete :
+clean :
 	rm -rf classes
 	rm -rf classestest
 
 prog :
-	javac -classpath classes -sourcepath src -d classes 
+	javac -classpath ./classes -sourcepath ./src -d ./classes ./src/fr/insarouen/asi/prog/asiaventure/programme.java
 
 tests :
-	javac -classpath classes:classestest -sourcepath src:srctest -d classestest
-
-
-java -classpath classes:classestest:/usr/share/junit4.jar
+	javac -classpath ./classes:./classestest:/usr/share/java/junit4.jar:/usr/share/java/hamcrest-library.jar -sourcepath ./srctest:./src -d ./classestest ./srctest/fr/AllTests.java
