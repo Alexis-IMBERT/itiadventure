@@ -1,6 +1,8 @@
 package fr.insarouen.asi.prog.asiaventure;
 
 import fr.insarouen.asi.prog.asiaventure.elements.Entite;
+import fr.insarouen.asi.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
+import fr.insarouen.asi.prog.asiaventure.EntiteDejaDansUnAutreMondeException;
 
 /**
  * Classe représentant un monde
@@ -59,13 +61,24 @@ public class Monde{
 	 * Ajoute une entitée dans le monde
 	 * @param entite l'entitée à ajouter
 	 */
-	public void ajouter(Entite entite){
+	public void ajouter(Entite entite) throws NomDEntiteDejaUtiliseDansLeMondeException , EntiteDejaDansUnAutreMondeException{
 		int taille = this.entites.length;
 		int i;
 		Entite[] tmp = new Entite[taille+1];
-		for(i=0;i<taille;i++){
-			tmp[i]=this.entites[i];
+		if this!=entite.getmonde(){
+			EntiteDejaDansUnAutreMondeException e2 = new EntiteDejaDansUnAutreMondeException();
+			throw e2;
 		}
+		for(i=0;i<taille;i++){
+			if (!this.entites[i].equals(entite)){
+				tmp[i]=this.entites[i];
+			}
+			else{
+				NomDEntiteDejaUtiliseDansLeMondeException e = new NomDEntiteDejaUtiliseDansLeMondeException();
+			throw e;
+			}
+		}
+
 		tmp[taille]=entite;
 		entites=tmp;
 	}
