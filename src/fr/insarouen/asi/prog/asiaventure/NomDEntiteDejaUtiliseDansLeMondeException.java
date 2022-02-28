@@ -12,7 +12,7 @@ public class NomDEntiteDejaUtiliseDansLeMondeException extends MondeException{
 	* Constructeur de l'exception de type NomDEntiteDejaUtiliseDansLeMondeException qui hérite de MondeException
 	*/
 
-	private NomDEntiteDejaUtiliseDansLeMondeException(){
+	public NomDEntiteDejaUtiliseDansLeMondeException(){
 		super();
 	}
 	
@@ -21,7 +21,7 @@ public class NomDEntiteDejaUtiliseDansLeMondeException extends MondeException{
 	*@param msg Chaine de caractère désignant NomDEntiteDejaUtiliseDansLeMondeException
 	*/
 
-	private NomDEntiteDejaUtiliseDansLeMondeException(String msg){
+	public NomDEntiteDejaUtiliseDansLeMondeException(String msg){
 		super(msg);
 	}
 }

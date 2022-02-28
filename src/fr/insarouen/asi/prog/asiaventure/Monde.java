@@ -65,7 +65,7 @@ public class Monde{
 		int taille = this.entites.length;
 		int i;
 		Entite[] tmp = new Entite[taille+1];
-		if this!=entite.getmonde(){
+		if (this!=entite.getMonde()){
 			EntiteDejaDansUnAutreMondeException e2 = new EntiteDejaDansUnAutreMondeException();
 			throw e2;
 		}
@@ -75,7 +75,7 @@ public class Monde{
 			}
 			else{
 				NomDEntiteDejaUtiliseDansLeMondeException e = new NomDEntiteDejaUtiliseDansLeMondeException();
-			throw e;
+				throw e;
 			}
 		}
 
