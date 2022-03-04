@@ -24,8 +24,6 @@ public abstract class Entite{
 	
 	/**
 	 * Constructeur d'une entité
-	 * @param nom Chaine de caractère désignant l'entité
-	 * @param monde Monde dans lequel évolue l'entité
 	 */
 	public Entite(String nom, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException{
 		this.nom=nom;
