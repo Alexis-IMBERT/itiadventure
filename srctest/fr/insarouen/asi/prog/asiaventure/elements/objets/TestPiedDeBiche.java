@@ -2,8 +2,10 @@ package fr.insarouen.asi.prog.asiaventure.elements.objets;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
+import org.hamcrest.core.IsEqual;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -26,7 +28,7 @@ public class TestPiedDeBiche {
 
 	@Test
 	public void testConstructeur(){
-		assertEquals(piedDeBicheTest,piedDeBicheTest);
+		assertThat(piedDeBicheTest, IsEqual.equalTo(piedDeBicheTest));
 	}
 
 	@Test
