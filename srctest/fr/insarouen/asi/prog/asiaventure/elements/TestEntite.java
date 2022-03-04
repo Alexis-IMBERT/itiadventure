@@ -1,13 +1,8 @@
 package fr.insarouen.asi.prog.asiaventure.elements;
 import org.junit.Test;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import static org.junit.Assert.*;
-import org.hamcrest.core.IsEqual;
-import static org.hamcrest.core.Is.is;
-
 import fr.insarouen.asi.prog.asiaventure.Monde;
-import fr.insarouen.asi.prog.asiaventure.elements.Entite;
 
 public class TestEntite{
 	//Attribut
