@@ -75,8 +75,14 @@ public abstract class Vivant extends Entite{
 		Objet objetADeposer = null;
 		for(i=0;i<taille;i++){
 			if(objets[i].getNom()!=nomObj){
-				newObjets[j]=objets[i];
-				j++;
+				if(j==taille-1){
+					ObjetNonPossedeParLeVivantException e = new ObjetNonPossedeParLeVivantException();
+					throw e;
+				}
+				else{
+					newObjets[j]=objets[i];
+					j++;
+				}
 			}
 			else{
 				objetADeposer = objets[i];

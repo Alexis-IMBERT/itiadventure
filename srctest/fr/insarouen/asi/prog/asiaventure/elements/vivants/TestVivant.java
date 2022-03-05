@@ -40,7 +40,9 @@ public class TestVivant {
 	public void avantTest() throws NomDEntiteDejaUtiliseDansLeMondeException{
 		pieceTest = new Piece("pieceTest", mondeTest);
 		objetTest1 = new PiedDeBiche("objetTest1",mondeTest);
+		objetTest1.setEstDeplacable(true);
 		objetTest2 = new PiedDeBiche("objetTest2",mondeTest);
+		objetTest2.setEstDeplacable(true);
 		vivantTest = new Vivant("vivantTest", mondeTest, 10, 10, pieceTest, objetTest1){};
 	}
 
@@ -95,20 +97,40 @@ public class TestVivant {
 		assertNull(vivantTest.getObjet("objetTest2"));
 	}
 
-	/*@Test
-    public void test_prendre__deposer_possede() throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException, ObjetNonPossedeParLeVivantException{
+	@Test
+    public void possedeTest() throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException, ObjetNonPossedeParLeVivantException{
         assertThat(vivantTest.possede(objetTest1), is(true));
-		vivantTest.getPiece().deposer(objetTest2);
-		vivantTest.prendre(objetTest2);
-		assertThat(vivantTest.possede(objetTest2), is(true));
-		vivantTest.deposer(objetTest2);
-		assertThat(vivantTest.possede(objetTest2), is(false));
-    }*/
-/*
+        assertThat(vivantTest.possede("objetTest1"), is(true));
+		assertThat(vivantTest.possede(objetTest2),is(false));
+		assertThat(vivantTest.possede("objetTest2"),is(false));
+    }
+
+	@Test
+	public void deposerObjetTest(){
+		try {
+			vivantTest.deposer(objetTest1);
+		} catch (ObjetNonPossedeParLeVivantException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		assertThat(vivantTest.possede(objetTest1),is(false));
+		assertThat(vivantTest.possede("objetTest1"),is(false));
+	}
+
+	@Test
+	public void deposerNomObjetTest(){
+		try {
+			vivantTest.deposer("objetTest1");
+		} catch (ObjetNonPossedeParLeVivantException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		assertThat(vivantTest.possede(objetTest1),is(false));
+		assertThat(vivantTest.possede("objetTest1"),is(false));
+	}
+
 	@Test(expected = ObjetNonPossedeParLeVivantException.class)
 	public void testObjetAbsentPiece() throws ObjetNonPossedeParLeVivantException{
 		vivantTest.deposer(objetTest2);
-	}*/
-
-
+	}
 }
