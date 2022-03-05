@@ -48,6 +48,7 @@ public abstract class Vivant extends Entite{
 		this.pointVie = pointVie;
 		this.pointForce = pointForce;
 		this.piece = piece;
+		piece.entrer(this);
 		this.objets = objets;
 	}
 	
@@ -55,36 +56,37 @@ public abstract class Vivant extends Entite{
 	/**
 	 * Le vivant dépose un objet qu'il a en sa possesion (implique le retrait de l'objet dans sa liste d'objet)
 	 * @param objet objet à déposer
+	 * @throws ObjetNonPossedeParLeVivantException l'objet n'est pas possédé par le vivant
 	 */
 	public void deposer(Objet objet) throws ObjetNonPossedeParLeVivantException{
-		int taille = objets.length;
-		Objet[] newObjets = new Objet[taille-1];
-		int i=0;
-		int j=0;
-		for(i=0;i<taille;i++){
-			if(objets[i]!=objet){
-				newObjets[j]=objets[i];
-				j++;
-			}
-		}
-		objets = newObjets;
+		deposer(objet.getNom());
 	}
 
 	/**
 	 * Dépose un objet en possesion du vivant grace à la chaine de caractère le désignant (implique le retrait de l'objet dans la liste des objet possédé par le vivant) 
 	 * @param nomObj chaine de caratère désignant l'objet que l'on souhaite retirer
+	 * @throws ObjetNonPossedeParLeVivantException
 	 */
 	public void deposer(String nomObj) throws ObjetNonPossedeParLeVivantException{
 		int taille = objets.length;
 		Objet[] newObjets = new Objet[taille-1];
 		int i=0;
 		int j=0;
+		Objet objetADeposer = null;
 		for(i=0;i<taille;i++){
 			if(objets[i].getNom()!=nomObj){
 				newObjets[j]=objets[i];
 				j++;
 			}
+			else{
+				objetADeposer = objets[i];
+			}
 		}
+		if(objetADeposer==null){
+			ObjetNonPossedeParLeVivantException e = new ObjetNonPossedeParLeVivantException();
+			throw e;
+		}
+		this.getPiece().deposer(objetADeposer);
 		objets = newObjets;
 	}
 	
@@ -117,7 +119,7 @@ public abstract class Vivant extends Entite{
 	}
 	
 	/**
-	 * 
+	 * getter pour avoir le nom la pièce du vivant
 	 * @return la pièce dans laquelle se trouve le vivant
 	 */
 	public Piece getPiece(){
@@ -144,16 +146,7 @@ public abstract class Vivant extends Entite{
 	 * @return boolean : true l'objet est présent false sinon
 	 */
 	public boolean possede(Objet objet){
-		int taille = objets.length;
-		int i=0;
-		boolean estPresent = false;
-		while(i<taille && !estPresent){
-			if (objets[i].equals(objet)){
-				estPresent = true;
-			}
-			i++;
-		}
-		return estPresent;
+		return possede(objet.getNom());
 	}
 	
 	/**
@@ -179,28 +172,7 @@ public abstract class Vivant extends Entite{
 	 * @param objet objet en question
 	 */
 	public void prendre(Objet objet) throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException{
-		int taille = objets.length;
-		int i=0;
-		Objet[] newObjets = new Objet[taille+1];
-		Objet res=null;
-		for (i=0;i<taille;i++){
-			if (!objets[i].equals(objet)){
-				newObjets[i] = objets[i];
-			}
-			else {
-				res = this.objets[i];
-			}
-		}
-		if (res==null){
-			ObjetAbsentDeLaPieceException e = new ObjetAbsentDeLaPieceException();
-			throw e;
-		}
-		if(!res.estDeplacable()){
-			ObjetNonDeplacableException e2 = new ObjetNonDeplacableException();
-			throw e2;
-		}
-		newObjets[taille] = objet;
-		objets = newObjets;
+		prendre(objet.getNom());
 	}
 	/**
 	 * Prend l'objet l'objet présent dans la pièce et l'ajoute dans l'inventaire du vivant
@@ -214,17 +186,21 @@ public abstract class Vivant extends Entite{
 		Objet objet = this.getPiece().retirer(nomObj);
 		Objet[] newObjets = new Objet[taille+1];
 		Objet res=null;
+		
 		for (i=0;i<taille;i++){
 			newObjets[i] = objets[i];
 		}
+
 		if (res==null){
 			ObjetAbsentDeLaPieceException e = new ObjetAbsentDeLaPieceException();
 			throw e;
 		}
+
 		if(!res.estDeplacable()){
-			ObjetNonDeplacableException e2 = new ObjetNonDeplacableException();
-			throw e2;
+			ObjetNonDeplacableException e = new ObjetNonDeplacableException();
+			throw e;
 		}
+
 		newObjets[taille] = objet;
 		objets = newObjets;
 	}
