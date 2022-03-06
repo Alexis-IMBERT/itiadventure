@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
+import static org.hamcrest.core.Is.is;
 
 import org.hamcrest.core.IsEqual;
 import org.junit.Before;
@@ -33,13 +34,13 @@ public class TestPiedDeBiche {
 
 	@Test
 	public void testIsEstDeplacable(){
-		assertTrue(piedDeBicheTest.isEstDeplacable());
+		assertThat(piedDeBicheTest.isEstDeplacable(),is(true));
 	}
 
 	@Test
 	public void testSetEstDeplacable(){
-		assertTrue(piedDeBicheTest.isEstDeplacable());
+		assertThat(piedDeBicheTest.isEstDeplacable(),is(true));
 		piedDeBicheTest.setEstDeplacable(false);
-		assertFalse(piedDeBicheTest.isEstDeplacable());
+		assertThat(piedDeBicheTest.isEstDeplacable(),is(false));
 	}
 }

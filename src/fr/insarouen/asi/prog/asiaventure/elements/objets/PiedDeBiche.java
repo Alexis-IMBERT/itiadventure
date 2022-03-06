@@ -29,6 +29,7 @@ public class PiedDeBiche extends Objet{
 	
 	public PiedDeBiche(String nom, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException{
 		super(nom,monde);
+		estDeplacable = true;
 	}
 
 	public boolean isEstDeplacable() {
