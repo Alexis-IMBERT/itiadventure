@@ -1,8 +1,6 @@
 package fr.insarouen.asi.prog.asiaventure.elements.objets;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.hamcrest.MatcherAssert.assertThat;import static org.junit.Assert.assertTrue;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 import org.hamcrest.core.IsEqual;

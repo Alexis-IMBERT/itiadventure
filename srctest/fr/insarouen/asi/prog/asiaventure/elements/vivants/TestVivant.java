@@ -1,13 +1,11 @@
 package fr.insarouen.asi.prog.asiaventure.elements.vivants;
 
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,7 +22,6 @@ import fr.insarouen.asi.prog.asiaventure.elements.objets.ObjetNonDeplacableExcep
 import fr.insarouen.asi.prog.asiaventure.elements.objets.PiedDeBiche;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.ObjetAbsentDeLaPieceException;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.Piece;
-import junit.framework.Assert;
 
 public class TestVivant {
 	static Monde mondeTest;
