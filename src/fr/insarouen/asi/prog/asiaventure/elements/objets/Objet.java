@@ -8,13 +8,6 @@ import fr.insarouen.asi.prog.asiaventure.elements.Entite;
  * Classe abstraite désignant un objet
 */
 public abstract class Objet extends Entite{
-	//Attributs
-	
-	/**
-	 * Attribut de type Boolean indiquant que l'Objet n'est pas deplacable
-	 */
-	private boolean estDeplacable=false;
-	
 	//Constructeur
 	/**
 	 * Constructeur d'un objet
@@ -33,6 +26,6 @@ public abstract class Objet extends Entite{
 	 * @return boolean : True si l'objet est déplacable ,False sinon
 	 */
 	public boolean estDeplacable(){
-		return this.estDeplacable;
+		return false;
 	}
 }

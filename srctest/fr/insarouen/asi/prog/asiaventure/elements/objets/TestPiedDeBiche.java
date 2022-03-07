@@ -2,8 +2,7 @@ package fr.insarouen.asi.prog.asiaventure.elements.objets;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.MatcherAssert.assertThat;import static org.junit.Assert.assertTrue;
 import static org.hamcrest.core.Is.is;
 
 import org.hamcrest.core.IsEqual;
@@ -33,14 +32,7 @@ public class TestPiedDeBiche {
 	}
 
 	@Test
-	public void testIsEstDeplacable(){
-		assertThat(piedDeBicheTest.isEstDeplacable(),is(true));
-	}
-
-	@Test
-	public void testSetEstDeplacable(){
-		assertThat(piedDeBicheTest.isEstDeplacable(),is(true));
-		piedDeBicheTest.setEstDeplacable(false);
-		assertThat(piedDeBicheTest.isEstDeplacable(),is(false));
+	public void testestDeplacable(){
+		assertThat(piedDeBicheTest.estDeplacable(),is(true));
 	}
 }

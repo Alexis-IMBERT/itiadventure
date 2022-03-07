@@ -10,13 +10,6 @@ import fr.insarouen.asi.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeExcepti
 
 public class PiedDeBiche extends Objet{
 	
-	//Attributs
-	
-	/**
-	 * Attribut de type Boolean indiquant que l'Objet est deplacable
-	 */
-	private boolean estDeplacable = true;
-	
 	//Constructeur
 	
 	/**
@@ -29,14 +22,9 @@ public class PiedDeBiche extends Objet{
 	
 	public PiedDeBiche(String nom, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException{
 		super(nom,monde);
-		estDeplacable = true;
 	}
 
-	public boolean isEstDeplacable() {
-		return estDeplacable;
-	}
-
-	public void setEstDeplacable(boolean estDeplacable) {
-		this.estDeplacable = estDeplacable;
+	public boolean estDeplacable() {
+		return true;
 	}
 }
