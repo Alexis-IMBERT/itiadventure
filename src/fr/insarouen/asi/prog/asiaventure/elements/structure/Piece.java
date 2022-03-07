@@ -1,5 +1,8 @@
 package fr.insarouen.asi.prog.asiaventure.elements.structure;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import fr.insarouen.asi.prog.asiaventure.Monde;
 import fr.insarouen.asi.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 import fr.insarouen.asi.prog.asiaventure.elements.objets.Objet ;
@@ -15,11 +18,11 @@ public class Piece extends ElementStructurel{
 	/**
 	 * Attribut de la classe : liste d'objet présent dans la pièce initialisé à vide.
 	 */
-	private Objet[] objets = new Objet[0];
+	private Map<String,Objet> objets = new HashMap<String,Objet>();
 	/**
 	 * Attribut de la classe : liste de vivant présent dans la pièce initialisé à vide.
 	 */
-	private Vivant[] vivants = new Vivant[0];
+	private Map<String,Vivant> vivants = new HashMap<String,Vivant>();
 	//Constructeur
 	/**
 	 * Constructeur d'une pièce
@@ -30,6 +33,7 @@ public class Piece extends ElementStructurel{
 	public Piece(String nom, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException{
 		super(nom,monde);
 	}
+	
 	//methodes
 	/**
 	 * Méthode vérifiant la présence d'un objet dans la pièce
@@ -37,16 +41,7 @@ public class Piece extends ElementStructurel{
 	 * @return boolean true : est présent dans la pièce, false : n'est pas présent
 	 */
 	public boolean contientObjet(Objet objet){
-		int taille = objets.length;
-		int i = 0;
-		boolean res = false;
-		while (i<taille && !res){
-			if (objets[i].equals(objet)){
-				res=true;
-			}
-			i++;
-		}
-		return res;
+		return contientObjet(objet.getNom());
 	}
 	
 	/**
@@ -55,38 +50,22 @@ public class Piece extends ElementStructurel{
 	 * @return boolean true : est présent dans la pièce, false : n'est pas présent
 	 */
 	public boolean contientObjet(String nomObj){
-		int taille = objets.length;
-		int i = 0;
-		boolean res = false;
-		while (i<taille && !res){
-			if (objets[i].getNom() == nomObj){
-				res=true;
-			}
-			i++;
-		}
-		return res;
+		return this.objets.containsKey(nomObj);
 	}
 
 	/**
 	 * Permet de déposer un objet dans une pièce
 	 * @param obj Objet que l'on souhaite déposer dans la pièce
 	 */
-	public void deposer(Objet obj){
-		int taille = objets.length;
-		Objet[] newObjets = new Objet[taille+1];
-		int i=0;
-		for (i=0;i<taille;i++){
-			newObjets[i] = this.objets[i];
-		}
-		newObjets[taille] = obj ;
-		this.objets = newObjets ;
+	public void deposer(Objet objet){
+		this.objets.put(objet.getNom(),objet);
 	}
 	
 	/**
 	 * Permet de récupérer la liste d'objet de la pièce
 	 * @return la liste des objets de la pièce
 	 */
-	public Objet[] getObjets(){
+	public Map<String,Objet> getObjets(){
 		return objets;
 	}
 	
@@ -95,31 +74,8 @@ public class Piece extends ElementStructurel{
 	 * @param obj Objet que l'on souhaite retirer de la liste
 	 * @return retourne l'objet à retirer
 	 */
-	public Objet retirer(Objet obj) throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException{
-		int taille = objets.length;
-		int i=0;
-		int j=0;
-		Objet[] newObjets = new Objet[taille-1];
-		Objet res=null;
-		for (i=0;i<taille;i++){
-			if (!objets[i].equals(obj)){
-				newObjets[j]=this.objets[i];
-				j++;
-			}
-			else {
-				res = this.objets[i];
-			}
-		}
-		if (res==null){
-			ObjetAbsentDeLaPieceException e = new ObjetAbsentDeLaPieceException();
-			throw e;
-		}
-		if(!res.estDeplacable()){
-			ObjetNonDeplacableException e2 = new ObjetNonDeplacableException();
-			throw e2;
-		}
-		this.objets = newObjets ;
-		return res;
+	public Objet retirer(Objet objet) throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException{
+		return retirer(objet.getNom());
 	}
 	
 	/**
@@ -128,48 +84,23 @@ public class Piece extends ElementStructurel{
 	 * @return l'objet à retirer
 	 */
 	public Objet retirer(String nomObj) throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException{
-		int taille = objets.length;
-		int i=0;
-		int j=0;
-		Objet[] newObjets = new Objet[taille-1];
-		Objet res=null;
-		for (i=0;i<taille;i++){
-			if (objets[i].getNom() != nomObj){
-				newObjets[j]=this.objets[i];
-				j++;
-			}
-			else {
-				res = this.objets[i];
-			}
+		if (!this.objets.containsKey(nomObj)){
+			throw new ObjetAbsentDeLaPieceException();
 		}
-		if (res==null){
-			ObjetAbsentDeLaPieceException e = new ObjetAbsentDeLaPieceException();
-			throw e;
+		Objet resultat = this.objets.get(nomObj) ;
+		if (!resultat.estDeplacable()){
+			throw new ObjetNonDeplacableException();
 		}
-		if(!res.estDeplacable()){
-			ObjetNonDeplacableException e2 = new ObjetNonDeplacableException();
-			throw e2;
-		}
-		this.objets = newObjets ;
-		return res;
+		objets.remove(nomObj);
+		return resultat;
 	}
-	
 	/**
 	 * Vérifie la présence d'un vivant dans la pièce
 	 * @param vivant Vivant que l'on recherche dans la pièce
 	 * @return boolean : true = est présent dans la pièce, false sinon.
 	 */
 	public boolean contientVivant(Vivant vivant){
-		int taille = vivants.length;
-		int i=0;
-		boolean estPresent = false;
-		while(i<taille && !estPresent){
-			if (vivants[i].equals(vivant)){
-				estPresent=true;
-			}
-			i++;
-		}
-		return estPresent;
+		return contientVivant(vivant.getNom());
 	}
 	
 	/**
@@ -178,37 +109,20 @@ public class Piece extends ElementStructurel{
 	 * @return boolean : true = est présent dans la pièce, false sinon.
 	 */
 	public boolean contientVivant(String nomVivant){
-		int taille = vivants.length;
-		int i=0;
-		boolean estPresent = false;
-		while(i<taille && !estPresent){
-			if (vivants[i].getNom() == nomVivant){
-				estPresent=true;
-			}
-			i++;
-		}
-		return estPresent;
+		return this.vivants.containsKey(nomVivant);
 	}
-	
 	/**
 	 * Fait entré un vivant dans la pièce (ajoute le vivant dans la pièce)
 	 * @param vivant vivant à faire rentrer
 	 */
 	public void entrer(Vivant vivant){
-		int taille = vivants.length;
-		Vivant[] newVivants = new Vivant[taille+1];
-		int i=0;
-		for(i=0;i<taille;i++){
-			newVivants[i] = vivants[i];
-		}
-		newVivants[taille] = vivant;
-		vivants = newVivants;
+		this.vivants.put(vivant.getNom(),vivant);
 	}
 	
 	/**
 	 * @return la liste des vivants contenue dans la pièce
 	 */
-	public Vivant[] getVivant(){
+	public Map<String,Vivant> getVivants(){
 		return this.vivants;
 	}
 	
@@ -218,26 +132,7 @@ public class Piece extends ElementStructurel{
 	 * @return le vivant en question
 	 */
 	public Vivant sortirVivant(Vivant vivant) throws VivantAbsentDeLaPieceException{
-		int taille = vivants.length;
-		int i=0;
-		int j=0;
-		Vivant[] newVivants = new Vivant[taille-1];
-		Vivant res=null;
-		for (i=0;i<taille;i++){
-			if (!vivants[i].equals(vivant)){
-				newVivants[j]=this.vivants[i];
-				j++;
-			}
-			else {
-				res = this.vivants[i];
-			}
-		}
-		if(res==null){
-			VivantAbsentDeLaPieceException e = new VivantAbsentDeLaPieceException();
-			throw e;
-		}
-		this.vivants = newVivants ;
-		return res;
+		return sortirVivant(vivant.getNom());
 	}
 
 	/**
@@ -245,26 +140,12 @@ public class Piece extends ElementStructurel{
 	 * @param nomVivant chaine de caractère désignant le vivant
 	 * @return le vivant en question
 	 */
-	public Vivant sortirVivants(String nomVivant) throws VivantAbsentDeLaPieceException{
-		int taille = vivants.length;
-		int i=0;
-		int j=0;
-		Vivant[] newVivants = new Vivant[taille-1];
-		Vivant res=null;
-		for (i=0;i<taille;i++){
-			if (vivants[i].getNom() != nomVivant){
-				newVivants[j]=this.vivants[i];
-				j++;
-			}
-			else {
-				res = this.vivants[i];
-			}
+	public Vivant sortirVivant(String nomVivant) throws VivantAbsentDeLaPieceException{
+		if (!this.vivants.containsKey(nomVivant)){
+			throw new VivantAbsentDeLaPieceException();
 		}
-		if(res==null){
-			VivantAbsentDeLaPieceException e = new VivantAbsentDeLaPieceException();
-			throw e;
-		}
-		this.vivants = newVivants ;
-		return res;
-	}
+		Vivant tmp = this.vivants.get(nomVivant);
+		this.vivants.remove(nomVivant);
+		return tmp;
+	}		
 }

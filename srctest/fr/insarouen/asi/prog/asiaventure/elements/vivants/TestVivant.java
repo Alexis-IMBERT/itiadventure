@@ -139,7 +139,7 @@ public class TestVivant {
 		assertThat(vivantTest.getObjet("objetTest1"), is(objetTest1));
 	}
 	
-/*
+
 	@Test(expected = ObjetAbsentDeLaPieceException.class)
 	public void prendreTestexception() throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException, NomDEntiteDejaUtiliseDansLeMondeException{
 		Objet objetTest3 = new Objet("objetTest3",mondeTest) {};
@@ -147,5 +147,5 @@ public class TestVivant {
 		vivantTest.getPiece().deposer(objetTest3);
 		vivantTest.prendre(objetTest1);
 	}
-*/
+
 }

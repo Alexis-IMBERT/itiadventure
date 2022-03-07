@@ -6,10 +6,6 @@ import fr.insarouen.asi.prog.asiaventure.elements.objets.*;
 import fr.insarouen.asi.prog.asiaventure.elements.vivants.Vivant;
 import fr.insarouen.asi.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 import fr.insarouen.asi.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
-import fr.insarouen.asi.prog.asiaventure.elements.structure.ObjetAbsentDeLaPieceException;
-import fr.insarouen.asi.prog.asiaventure.ASIAventureException;
-import fr.insarouen.asi.prog.asiaventure.elements.vivants.ObjetNonPossedeParLeVivantException;
-
 import org.junit.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import org.hamcrest.core.IsEqual;
@@ -65,13 +61,13 @@ public class TestPiece {
     assertThat(unePiece.contientObjet(unPiedDeBiche), is(false));
 
 	}
-/*
+
 	@Test(expected=ObjetAbsentDeLaPieceException.class)
 	public void test_contientObjet_avecExceptionAbsentPiece () throws NomDEntiteDejaUtiliseDansLeMondeException, ObjetAbsentDeLaPieceException, ObjetNonDeplacableException{
 		PiedDeBiche unPiedDeBiche = new PiedDeBiche("PiedDeBiche2",m1);
     unePiece.retirer(unPiedDeBiche);
 	}
-*/
+
 
 	@Test(expected=ObjetNonDeplacableException.class)
 	public void test_contientObjet_avecExceptionNonDeplacable () throws NomDEntiteDejaUtiliseDansLeMondeException, ObjetAbsentDeLaPieceException, ObjetNonDeplacableException{
@@ -95,11 +91,10 @@ public class TestPiece {
 
 	}
 
-	/*
+	
 	@Test(expected=VivantAbsentDeLaPieceException.class)
 	public void test_contientVivant_exceptionVivantabsent ()  throws VivantAbsentDeLaPieceException{
 		unePiece.sortirVivant(v1);
 		unePiece.sortirVivant(v1);
 	}
-*/
 }

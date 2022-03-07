@@ -64,4 +64,8 @@ public class Monde{
 	public String toString(){
 		return String.format("%s",nomDuMonde);
 	}
+
+	public Map<String,Entite> getEntites(){
+		return this.entites;
+	}
 }

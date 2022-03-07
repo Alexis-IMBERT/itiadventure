@@ -28,6 +28,9 @@ public abstract class Entite{
 	public Entite(String nom, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException{
 		this.nom=nom;
 		this.monde=monde;
+		if(monde.getEntite(nom) != null){
+			throw new NomDEntiteDejaUtiliseDansLeMondeException();
+		}
 	}
 	
 	//methodes
