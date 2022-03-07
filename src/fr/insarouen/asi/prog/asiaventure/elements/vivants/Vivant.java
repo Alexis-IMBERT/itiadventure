@@ -203,8 +203,7 @@ public abstract class Vivant extends Entite{
 		}
 
 		if(!res.estDeplacable()){
-			ObjetNonDeplacableException e = new ObjetNonDeplacableException();
-			throw e;
+			throw new ObjetNonDeplacableException();
 		}
 
 		newObjets[taille] = objet;

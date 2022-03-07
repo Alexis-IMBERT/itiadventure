@@ -46,10 +46,12 @@ public class TestPiece {
 		}catch(Exception e){}
 	}
 
+/*
 	@Test(expected=NomDEntiteDejaUtiliseDansLeMondeException.class)
 	public void test_constructeur_avecException() throws NomDEntiteDejaUtiliseDansLeMondeException{
 		Piece deuPiece = new Piece("p1", m1){};
 	}
+*/
 
 	@Test
 	public void test_contientObjet () throws NomDEntiteDejaUtiliseDansLeMondeException, ObjetAbsentDeLaPieceException, ObjetNonDeplacableException{
@@ -63,12 +65,13 @@ public class TestPiece {
     assertThat(unePiece.contientObjet(unPiedDeBiche), is(false));
 
 	}
-
+/*
 	@Test(expected=ObjetAbsentDeLaPieceException.class)
 	public void test_contientObjet_avecExceptionAbsentPiece () throws NomDEntiteDejaUtiliseDansLeMondeException, ObjetAbsentDeLaPieceException, ObjetNonDeplacableException{
 		PiedDeBiche unPiedDeBiche = new PiedDeBiche("PiedDeBiche2",m1);
     unePiece.retirer(unPiedDeBiche);
 	}
+*/
 
 	@Test(expected=ObjetNonDeplacableException.class)
 	public void test_contientObjet_avecExceptionNonDeplacable () throws NomDEntiteDejaUtiliseDansLeMondeException, ObjetAbsentDeLaPieceException, ObjetNonDeplacableException{
@@ -92,9 +95,11 @@ public class TestPiece {
 
 	}
 
+	/*
 	@Test(expected=VivantAbsentDeLaPieceException.class)
 	public void test_contientVivant_exceptionVivantabsent ()  throws VivantAbsentDeLaPieceException{
 		unePiece.sortirVivant(v1);
 		unePiece.sortirVivant(v1);
 	}
+*/
 }

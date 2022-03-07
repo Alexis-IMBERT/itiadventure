@@ -1,8 +1,9 @@
 package fr.insarouen.asi.prog.asiaventure;
 
 import fr.insarouen.asi.prog.asiaventure.elements.Entite;
-import fr.insarouen.asi.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
-import fr.insarouen.asi.prog.asiaventure.EntiteDejaDansUnAutreMondeException;
+import java.util.Map;
+
+import java.util.HashMap;
 
 /**
  * Classe représentant un monde
@@ -16,7 +17,8 @@ public class Monde{
 	/**
 	 * Attibut de type tableau d'entité pour connaitre les entité présent dans le monde
 	 */
-	private Entite[] entites;
+	private Map<String,Entite> entites;
+	
 	//constructeurs
 	/**
 	 * Constructeur d'un monde
@@ -24,7 +26,7 @@ public class Monde{
 	 */
 	public Monde(String nomDuMonde){
 		this.nomDuMonde =nomDuMonde;
-		this.entites = new Entite[0];
+		this.entites = new HashMap<String,Entite>();
 	}
 	//Methodes
 	/**
@@ -40,48 +42,22 @@ public class Monde{
 	 * @return un type Entite qui est l'entitée recherché
 	 */
 	public Entite getEntite(String nomEntite){
-		boolean estPresent=false;
-		int i=0;
-		while(!estPresent && i<entites.length){
-			if (entites[i].getNom()==nomEntite){
-				estPresent = true;
-			}
-			else{
-				i++;
-			}
-		}
-		if(estPresent){
-			return entites[i];
-		}
-		else{
-			return (Entite)null;
-		}
+		return this.entites.get(nomEntite);
 	}
 	/**
 	 * Ajoute une entitée dans le monde
 	 * @param entite l'entitée à ajouter
 	 */
-	public void ajouter(Entite entite) throws NomDEntiteDejaUtiliseDansLeMondeException , EntiteDejaDansUnAutreMondeException{
-		int taille = this.entites.length;
-		int i;
-		Entite[] tmp = new Entite[taille+1];
-		if (this!=entite.getMonde()){
-			EntiteDejaDansUnAutreMondeException e2 = new EntiteDejaDansUnAutreMondeException();
-			throw e2;
+	public void ajouter(Entite entite) throws NomDEntiteDejaUtiliseDansLeMondeException , EntiteDejaDansUnAutreMondeException {
+		if(entite.getMonde()!=this){
+			throw new EntiteDejaDansUnAutreMondeException();
 		}
-		for(i=0;i<taille;i++){
-			if (!this.entites[i].getNom().equals(entite.getNom())){
-				tmp[i]=this.entites[i];
-			}
-			else{
-				NomDEntiteDejaUtiliseDansLeMondeException e = new NomDEntiteDejaUtiliseDansLeMondeException();
-				throw e;
-			}
+		if(this.entites.containsKey(entite.getNom())){
+			throw new NomDEntiteDejaUtiliseDansLeMondeException();
 		}
-
-		tmp[taille]=entite;
-		entites=tmp;
+		this.entites.put(entite.getNom(),entite);
 	}
+
 	/**
 	 * Rédéfinition de la méthode toString pour les mondes
 	 */
