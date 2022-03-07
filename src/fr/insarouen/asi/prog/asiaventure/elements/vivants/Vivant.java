@@ -1,5 +1,9 @@
 package fr.insarouen.asi.prog.asiaventure.elements.vivants;
 
+
+import java.util.HashMap;
+import java.util.Map;
+
 import fr.insarouen.asi.prog.asiaventure.Monde;
 import fr.insarouen.asi.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 import fr.insarouen.asi.prog.asiaventure.elements.Entite;
@@ -30,7 +34,7 @@ public abstract class Vivant extends Entite{
 	/**
 	 * Attribut désignant les objets que porte le vivant
 	 */
-	private Objet[] objets;
+	private Map<String,Objet> objets;
 	
 	//Constructeurs
 	/**
@@ -49,7 +53,11 @@ public abstract class Vivant extends Entite{
 		this.pointForce = pointForce;
 		this.piece = piece;
 		piece.entrer(this);
-		this.objets = objets;
+		this.objets = new HashMap<String,Objet>();
+		int i;
+		for(i=0;i<objets.length;i++){
+			this.objets.put(objets[i].getNom(), objets[i]);
+		}
 	}
 	
 	//Methodes
@@ -68,39 +76,19 @@ public abstract class Vivant extends Entite{
 	 * @throws ObjetNonPossedeParLeVivantException
 	 */
 	public void deposer(String nomObj) throws ObjetNonPossedeParLeVivantException{
-		int taille = objets.length;
-		Objet[] newObjets = new Objet[taille-1];
-		int i=0;
-		int j=0;
-		Objet objetADeposer = null;
-		for(i=0;i<taille;i++){
-			if(objets[i].getNom()!=nomObj){
-				if(j==taille-1){
-					ObjetNonPossedeParLeVivantException e = new ObjetNonPossedeParLeVivantException();
-					throw e;
-				}
-				else{
-					newObjets[j]=objets[i];
-					j++;
-				}
-			}
-			else{
-				objetADeposer = objets[i];
-			}
+		if(!this.objets.containsKey(nomObj)){
+			throw new ObjetNonPossedeParLeVivantException();
 		}
-		if(objetADeposer==null){
-			ObjetNonPossedeParLeVivantException e = new ObjetNonPossedeParLeVivantException();
-			throw e;
-		}
-		this.getPiece().deposer(objetADeposer);
-		objets = newObjets;
+		Objet tmp = objets.get(nomObj);
+		objets.remove(nomObj);
+		this.getPiece().deposer(tmp);
 	}
 	
 	/**
 	 * retourne la liste d'objet possédé par le vivant
 	 * @return la liste d'objet
 	 */
-	public Objet[] getObjets(){
+	public Map<String,Objet> getObjets(){
 		return objets;
 	}
 	
@@ -110,18 +98,7 @@ public abstract class Vivant extends Entite{
 	 * @return l'objet que l'on souhaite obtenir
 	 */
 	public Objet getObjet(String nomObjet){
-		int taille = objets.length;
-		int i=0;
-		boolean estPresent = false;
-		Objet res = null;
-		while (i<taille && !estPresent){
-			if (objets[i].getNom() == nomObjet){
-				res = objets[i];
-				estPresent=true;
-			}
-			i++;
-		}
-		return res;
+		return this.objets.get(nomObjet);
 	}
 	
 	/**
@@ -161,16 +138,7 @@ public abstract class Vivant extends Entite{
 	 * @return boolean : true l'objet est présent false sinon
 	 */
 	public boolean possede(String nomObjet){
-		int taille = objets.length;
-		int i=0;
-		boolean estPresent = false;
-		while(i<taille && !estPresent){
-			if (objets[i].getNom() == nomObjet){
-				estPresent = true;
-			}
-			i++;
-		}
-		return estPresent;
+		return this.objets.containsKey(nomObjet);
 	}
 	
 	/**
@@ -187,27 +155,8 @@ public abstract class Vivant extends Entite{
 	 * @throws ObjetAbsentDeLaPieceException
 	 */
 	public void prendre(String nomObj) throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException{
-		int taille = objets.length;
-		int i=0;
 		Objet objet = this.getPiece().retirer(nomObj);
-		Objet[] newObjets = new Objet[taille+1];
-		Objet res=null;
-		
-		for (i=0;i<taille;i++){
-			newObjets[i] = objets[i];
-		}
-
-		if (res==null){
-			ObjetAbsentDeLaPieceException e = new ObjetAbsentDeLaPieceException();
-			throw e;
-		}
-
-		if(!res.estDeplacable()){
-			throw new ObjetNonDeplacableException();
-		}
-
-		newObjets[taille] = objet;
-		objets = newObjets;
+		this.objets.put(objet.getNom(), objet);
 	}
 
 	/**

@@ -7,6 +7,10 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.Before;
@@ -20,6 +24,7 @@ import fr.insarouen.asi.prog.asiaventure.elements.objets.ObjetNonDeplacableExcep
 import fr.insarouen.asi.prog.asiaventure.elements.objets.PiedDeBiche;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.ObjetAbsentDeLaPieceException;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.Piece;
+import junit.framework.Assert;
 
 public class TestVivant {
 	static Monde mondeTest;
@@ -82,9 +87,9 @@ public class TestVivant {
 
 	@Test
 	public void getObjetsTest(){
-		Objet[] objetTheorique = new Objet[1];
-		objetTheorique[0]=objetTest1;
-		assertArrayEquals(vivantTest.getObjets(), objetTheorique);
+		Map<String,Objet> objetTheorique = new HashMap<String,Objet>();
+		objetTheorique.put(objetTest1.getNom(), objetTest1);
+		assertEquals(vivantTest.getObjets(), objetTheorique);
 	}
 
 	@Test
@@ -126,15 +131,14 @@ public class TestVivant {
 		vivantTest.deposer(objetTest2);
 	}
 
-	/*
+	
 	@Test
 	public void prendreTest() throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException, ObjetNonPossedeParLeVivantException{
 		vivantTest.deposer(objetTest1);
-		System.out.println(Arrays.toString(vivantTest.getPiece().getObjets()));
 		vivantTest.prendre(objetTest1);
 		assertThat(vivantTest.getObjet("objetTest1"), is(objetTest1));
 	}
-	*/
+	
 /*
 	@Test(expected = ObjetAbsentDeLaPieceException.class)
 	public void prendreTestexception() throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException, NomDEntiteDejaUtiliseDansLeMondeException{
