@@ -7,7 +7,6 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 import static org.hamcrest.core.Is.is;
@@ -129,12 +128,21 @@ public class TestVivant {
 		vivantTest.deposer(objetTest2);
 	}
 
-	
+	/*
 	@Test
 	public void prendreTest() throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException, ObjetNonPossedeParLeVivantException{
 		vivantTest.deposer(objetTest1);
 		System.out.println(Arrays.toString(vivantTest.getPiece().getObjets()));
 		vivantTest.prendre(objetTest1);
 		assertThat(vivantTest.getObjet("objetTest1"), is(objetTest1));
+	}
+	*/
+
+	@Test(expected = ObjetAbsentDeLaPieceException.class)
+	public void prendreTestexception() throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException, NomDEntiteDejaUtiliseDansLeMondeException{
+		Objet objetTest3 = new Objet("objetTest3",mondeTest) {};
+		vivantTest.getPiece().deposer(objetTest2);
+		vivantTest.getPiece().deposer(objetTest3);
+		vivantTest.prendre(objetTest1);
 	}
 }
