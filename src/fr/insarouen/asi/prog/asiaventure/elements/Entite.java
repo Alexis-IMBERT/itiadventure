@@ -26,11 +26,11 @@ public abstract class Entite{
 	 * Constructeur d'une entité
 	 */
 	public Entite(String nom, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException{
-		this.nom=nom;
-		this.monde=monde;
-		if(monde.getEntite(nom) != null){
+		if(monde.getEntites().containsKey(nom)){
 			throw new NomDEntiteDejaUtiliseDansLeMondeException();
 		}
+		this.nom=nom;
+		this.monde=monde;
 	}
 	
 	//methodes

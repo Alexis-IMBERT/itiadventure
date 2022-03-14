@@ -28,11 +28,11 @@ public class TestObjets {
 		}catch(Exception e){};
 	}
 
-	/*
+	
 	@Test(expected=NomDEntiteDejaUtiliseDansLeMondeException.class)
 	public void test_constructeur_avecException() throws NomDEntiteDejaUtiliseDansLeMondeException{
 		unObjet = new Objet("Objet1", MondeTest1){ public boolean estDeplacable(){return false;} };
 		Objet deuxiemeObjet = new Objet("Objet1", MondeTest1){ public boolean estDeplacable(){return false;} };
 	}
-*/
+
 }
