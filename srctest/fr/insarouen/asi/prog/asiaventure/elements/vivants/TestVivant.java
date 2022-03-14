@@ -23,7 +23,7 @@ import fr.insarouen.asi.prog.asiaventure.elements.objets.PiedDeBiche;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.ObjetAbsentDeLaPieceException;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.Piece;
 
-public class TestVivant {
+public class TestVivant{
 	static Monde mondeTest;
 	Vivant vivantTest;
 	Piece pieceTest;

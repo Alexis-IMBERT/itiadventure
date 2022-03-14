@@ -1,5 +1,7 @@
 package fr.insarouen.asi.prog.asiaventure.elements;
 
+import fr.insarouen.asi.prog.asiaventure.elements.objets.Objet;
+
 /**
  * @author Alexis Imbert et Mehdi Saissi Hassani
  * Interface de l'activable

@@ -6,11 +6,14 @@ import fr.insarouen.asi.prog.asiaventure.elements.objets.*;
 import fr.insarouen.asi.prog.asiaventure.elements.vivants.Vivant;
 import fr.insarouen.asi.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 import fr.insarouen.asi.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
+
 import org.junit.Test;
-import static org.hamcrest.MatcherAssert.assertThat;
 import org.hamcrest.core.IsEqual;
-import static org.hamcrest.core.Is.is;
 import org.junit.BeforeClass;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+
 
 public class TestPiece {
 
@@ -20,17 +23,17 @@ public class TestPiece {
 
 	@BeforeClass
 	public static void chargement() throws NomDEntiteDejaUtiliseDansLeMondeException {
-    m1 = new Monde("m1");
-    String nom = new String("Mehdi");
-    int pv=1;
-    int pf=4;
+		m1 = new Monde("m1");
+		String nom = new String("Mehdi");
+		int pv=1;
+		int pf=4;
 
-    Objet[] objs=new Objet [2];
-    objs[0]=new PiedDeBiche("pdb1", m1);
-    objs[1]=new PiedDeBiche("pdb2", m1);
+		Objet[] objs=new Objet [2];
+		objs[0]=new PiedDeBiche("pdb1", m1);
+		objs[1]=new PiedDeBiche("pdb2", m1);
 
-    unePiece = new Piece("p1",m1);
-    v1 = new Vivant(nom, m1, pv, pf, unePiece, objs){};
+		unePiece = new Piece("p1",m1);
+		v1 = new Vivant(nom, m1, pv, pf, unePiece, objs){};
 
 	}
 

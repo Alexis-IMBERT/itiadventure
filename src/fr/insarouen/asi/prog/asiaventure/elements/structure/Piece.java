@@ -8,6 +8,7 @@ import fr.insarouen.asi.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeExcepti
 import fr.insarouen.asi.prog.asiaventure.elements.objets.Objet ;
 import fr.insarouen.asi.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
 import fr.insarouen.asi.prog.asiaventure.elements.vivants.Vivant;
+import fr.insarouen.asi.prog.asiaventure.elements.structure.Porte;
 
 /**
  * Classe Pièce basé sur la classe abstraite ElementStructurel
@@ -15,6 +16,7 @@ import fr.insarouen.asi.prog.asiaventure.elements.vivants.Vivant;
  */
 public class Piece extends ElementStructurel{
 	//Attributs
+	private Map<String,Porte> portes = new HashMap<String,Porte>();
 	/**
 	 * Attribut de la classe : liste d'objet présent dans la pièce initialisé à vide.
 	 */
@@ -43,7 +45,6 @@ public class Piece extends ElementStructurel{
 	public boolean contientObjet(Objet objet){
 		return contientObjet(objet.getNom());
 	}
-	
 	/**
 	 * Méthode vérifiant la présence d'un objet dans la pièce
 	 * @param nomObj : chaine de caractère désignant l'objet que l'on recherche
@@ -51,6 +52,19 @@ public class Piece extends ElementStructurel{
 	 */
 	public boolean contientObjet(String nomObj){
 		return this.objets.containsKey(nomObj);
+	}
+
+	public void addPorte(Porte porte){
+		this.portes.put(porte.getNom(),porte);
+	}
+	public boolean aLaPorte(String nomPorte){
+		return this.portes.containsKey(nomPorte);
+	}
+	public boolean aLaPorte(Porte porte){
+		return aLaPorte(porte.getNom());
+	}
+	public Porte getPorte(String nomPorte){
+		return this.portes.get(nomPorte);
 	}
 
 	/**

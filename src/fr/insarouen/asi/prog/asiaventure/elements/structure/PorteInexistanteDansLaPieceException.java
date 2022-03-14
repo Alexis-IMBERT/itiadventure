@@ -2,7 +2,7 @@ package fr.insarouen.asi.prog.asiaventure.elements.structure;
 
 import fr.insarouen.asi.prog.asiaventure.elements.structure.ElementStructurelException;
 
-public class PorteInexistanteDansLaPieceException{
+public class PorteInexistanteDansLaPieceException extends PieceException{
 	public PorteInexistanteDansLaPieceException(){
 		super();
 	}

@@ -11,6 +11,11 @@ import fr.insarouen.asi.prog.asiaventure.elements.objets.Objet;
 import fr.insarouen.asi.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.ObjetAbsentDeLaPieceException;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.Piece;
+import fr.insarouen.asi.prog.asiaventure.elements.structure.Porte;
+import fr.insarouen.asi.prog.asiaventure.elements.structure.PorteFermeException;
+import fr.insarouen.asi.prog.asiaventure.elements.structure.PorteInexistanteDansLaPieceException;
+import fr.insarouen.asi.prog.asiaventure.elements.Etat;
+
 /**
  * classe abstraite désignant un vivant
  */
@@ -84,6 +89,18 @@ public abstract class Vivant extends Entite{
 		this.getPiece().deposer(tmp);
 	}
 	
+	public void franchir(Porte porte) throws PorteFermeException,PorteInexistanteDansLaPieceException{
+		franchir(porte.getNom());
+	}
+	public void franchir(String nomPorte) throws PorteFermeException,PorteInexistanteDansLaPieceException{
+		if(!this.getPiece().aLaPorte(nomPorte)){
+			throw new PorteInexistanteDansLaPieceException("La Porte n'existe pas.");
+		}
+		if(this.getPiece().getPorte(nomPorte).getEtat().equals(Etat.FERME)){
+			throw new PorteFermeException("La Porte est fermee");
+		}
+		this.getPiece().getPorte(nomPorte).getPieceAutreCote(this.getPiece());
+	}
 	/**
 	 * retourne la liste d'objet possédé par le vivant
 	 * @return la liste d'objet
