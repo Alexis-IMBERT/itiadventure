@@ -1,17 +1,11 @@
 package fr.insarouen.asi.prog.asiaventure.elements.structure;
 
 import fr.insarouen.asi.prog.asiaventure.Monde;
-import fr.insarouen.asi.prog.asiaventure.elements.structure.Piece;
 import fr.insarouen.asi.prog.asiaventure.elements.Etat;
 import fr.insarouen.asi.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
-import fr.insarouen.asi.prog.asiaventure.elements.ActivationException;
-import fr.insarouen.asi.prog.asiaventure.elements.ActivationImpossibleAvecObjetException;
 import fr.insarouen.asi.prog.asiaventure.elements.ActivationImpossibleException;
-import fr.insarouen.asi.prog.asiaventure.elements.Activable;
-import fr.insarouen.asi.prog.asiaventure.elements.objets.Objet;
 
 import org.junit.Test;
-import org.hamcrest.core.IsEqual;
 import org.junit.BeforeClass;
 import org.junit.Before;
 
@@ -52,10 +46,23 @@ public class TestPorte{
 		assertThat(porte.getPieceAutreCote(pieceB),is(pieceA));
 	}
 
-	/*
-	@Test(expected = ActivationImpossibleException)
-	public void TestActiverAvecException1(){
-		
+	
+	@Test(expected = ActivationImpossibleException.class)
+	public void TestActiverAvecException1() throws ActivationImpossibleException{
+		porte.setEtat(Etat.VERROUILLE);
+		porte.activer();
 	}
-	*/
+
+	@Test(expected = ActivationImpossibleException.class)
+	public void TestActiverAvecException2() throws ActivationImpossibleException{
+		porte.setEtat(Etat.CASSE);
+		porte.activer();
+	}
+
+	@Test(expected = ActivationImpossibleException.class)
+	public void TestActiverAvecException3() throws ActivationImpossibleException{
+		porte.setEtat(Etat.DEVERROUILLE);
+		porte.activer();
+	}
+	
 }

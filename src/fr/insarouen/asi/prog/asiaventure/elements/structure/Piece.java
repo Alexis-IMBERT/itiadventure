@@ -8,7 +8,6 @@ import fr.insarouen.asi.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeExcepti
 import fr.insarouen.asi.prog.asiaventure.elements.objets.Objet ;
 import fr.insarouen.asi.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
 import fr.insarouen.asi.prog.asiaventure.elements.vivants.Vivant;
-import fr.insarouen.asi.prog.asiaventure.elements.structure.Porte;
 
 /**
  * Classe Pièce basé sur la classe abstraite ElementStructurel

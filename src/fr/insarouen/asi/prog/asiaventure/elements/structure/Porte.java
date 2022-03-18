@@ -1,10 +1,8 @@
 package fr.insarouen.asi.prog.asiaventure.elements.structure;
 
 import fr.insarouen.asi.prog.asiaventure.Monde;
-import fr.insarouen.asi.prog.asiaventure.elements.structure.Piece;
 import fr.insarouen.asi.prog.asiaventure.elements.Etat;
 import fr.insarouen.asi.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
-import fr.insarouen.asi.prog.asiaventure.elements.ActivationException;
 import fr.insarouen.asi.prog.asiaventure.elements.ActivationImpossibleAvecObjetException;
 import fr.insarouen.asi.prog.asiaventure.elements.ActivationImpossibleException;
 import fr.insarouen.asi.prog.asiaventure.elements.Activable;
@@ -38,6 +36,10 @@ public class Porte extends ElementStructurel implements Activable{
     */
 	private Etat etat = Etat.OUVERT;
 
+	void setEtat(Etat etat) {
+		this.etat = etat;
+	}
+
 	//Constructeur
 	public Porte(String nom,Monde monde, Piece pieceA, Piece pieceB) throws NomDEntiteDejaUtiliseDansLeMondeException{
 		super(nom,monde);
@@ -51,30 +53,29 @@ public class Porte extends ElementStructurel implements Activable{
 	}
 
 	public void activer() throws ActivationImpossibleException{
-		/*
+		
 		switch(this.getEtat()){
 			case CASSE:
 				throw new ActivationImpossibleException("La porte est Cassée");
-				break;
+				//Pas de break après un throw
 			case VERROUILLE:
 				throw new ActivationImpossibleException("La porte est vérrouillé");
-				break;
-			case OUVERT:
+			case OUVERT: 
 				this.etat = Etat.FERME;
 				break;
-			case FERME:
-				this.etat = Etat.OUVERT;
+			case FERME:	this.etat = Etat.OUVERT;
 				break;
+			default:
+				throw new ActivationImpossibleException("La porte n'est pas dans un etat logique : deverrouille");
 		}
-		*/
     }
 	
     public void activerAvec(Objet obj) throws ActivationImpossibleAvecObjetException,ActivationImpossibleException{
-        //pass;
+        //pass;-> serrure
     }
     public boolean ActivableAvec(Objet obj){
         return true;
-		//pass;
+		//pass;-> serrure
     }
 	/*
     public Serrure getSerrure(){

@@ -68,29 +68,29 @@ public class TestPiece {
 	@Test(expected=ObjetAbsentDeLaPieceException.class)
 	public void test_contientObjet_avecExceptionAbsentPiece () throws NomDEntiteDejaUtiliseDansLeMondeException, ObjetAbsentDeLaPieceException, ObjetNonDeplacableException{
 		PiedDeBiche unPiedDeBiche = new PiedDeBiche("PiedDeBiche2",m1);
-    unePiece.retirer(unPiedDeBiche);
+		unePiece.retirer(unPiedDeBiche);
 	}
 
 
 	@Test(expected=ObjetNonDeplacableException.class)
 	public void test_contientObjet_avecExceptionNonDeplacable () throws NomDEntiteDejaUtiliseDansLeMondeException, ObjetAbsentDeLaPieceException, ObjetNonDeplacableException{
-    Objet unObjet = new Objet("obj1", m1){ public boolean estDeplacable(){return false;} };
-    assertThat(unePiece.contientObjet(unObjet), is(false));
-    unePiece.deposer(unObjet);
-    assertThat(unePiece.contientObjet(unObjet),is(true));
-    unePiece.retirer(unObjet);
+		Objet unObjet = new Objet("obj1", m1){ public boolean estDeplacable(){return false;} };
+		assertThat(unePiece.contientObjet(unObjet), is(false));
+		unePiece.deposer(unObjet);
+		assertThat(unePiece.contientObjet(unObjet),is(true));
+		unePiece.retirer(unObjet);
 	}
 
 
 	@Test
 	public void test_contientVivant () throws VivantAbsentDeLaPieceException {
-    assertThat(unePiece.contientVivant(v1), is(true));
+		assertThat(unePiece.contientVivant(v1), is(true));
 
-    unePiece.sortirVivant(v1);
-    assertThat(unePiece.contientVivant(v1), is(false));
+		unePiece.sortirVivant(v1);
+		assertThat(unePiece.contientVivant(v1), is(false));
 
-    unePiece.entrer(v1);
-    assertThat(unePiece.contientVivant(v1), is(true));
+		unePiece.entrer(v1);
+		assertThat(unePiece.contientVivant(v1), is(true));
 
 	}
 
