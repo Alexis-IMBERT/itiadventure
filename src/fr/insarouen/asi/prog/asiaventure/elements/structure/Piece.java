@@ -53,15 +53,37 @@ public class Piece extends ElementStructurel{
 		return this.objets.containsKey(nomObj);
 	}
 
+	/**
+	 * Ajoute une porte dans la pièce
+	 * @param porte la porte a ajouter
+	 */
 	public void addPorte(Porte porte){
 		this.portes.put(porte.getNom(),porte);
 	}
+
+	/**
+	 * Vérifie la présence de la porte grace a son nom dans la pièce
+	 * @param nomPorte nom de la porte 
+	 * @return booleen : vrai si la porte est présente faux sinon
+	 */
 	public boolean aLaPorte(String nomPorte){
 		return this.portes.containsKey(nomPorte);
 	}
+
+	/**
+	 * Vérifie la présence de la porte dans la pièce
+	 * @param porte porte dont on souhaite vérifier la présence dans la pièce
+	 * @return booleen : vrai si la porte est présente faux sinon
+	 */
 	public boolean aLaPorte(Porte porte){
 		return aLaPorte(porte.getNom());
 	}
+
+	/**
+	 * retourne l'objet porte dont on a le nom
+	 * @param nomPorte nom de la porte que l'on souhaite récupérer
+	 * @return Une porte
+	 */
 	public Porte getPorte(String nomPorte){
 		return this.portes.get(nomPorte);
 	}

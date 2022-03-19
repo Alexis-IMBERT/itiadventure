@@ -14,6 +14,7 @@ import fr.insarouen.asi.prog.asiaventure.elements.structure.Piece;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.Porte;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.PorteFermeException;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.PorteInexistanteDansLaPieceException;
+import fr.insarouen.asi.prog.asiaventure.elements.structure.VivantAbsentDeLaPieceException;
 import fr.insarouen.asi.prog.asiaventure.elements.Etat;
 
 /**
@@ -89,17 +90,35 @@ public abstract class Vivant extends Entite{
 		this.getPiece().deposer(tmp);
 	}
 	
-	public void franchir(Porte porte) throws PorteFermeException,PorteInexistanteDansLaPieceException{
+	/**
+	 * Franchissement de la porte en paramètre
+	 * @param porte porte à frnchir
+	 * @throws PorteFermeException exception si la porte est fermé
+	 * @throws PorteInexistanteDansLaPieceException exception si la porte n'est pas dans la pièce
+	 * @throws VivantAbsentDeLaPieceException
+	 */
+	public void franchir(Porte porte) throws PorteFermeException,PorteInexistanteDansLaPieceException, VivantAbsentDeLaPieceException{
 		franchir(porte.getNom());
 	}
-	public void franchir(String nomPorte) throws PorteFermeException,PorteInexistanteDansLaPieceException{
+
+	/**
+	 * Franchissement de la porte dont le nom est en paramètre
+	 * @param nomPorte
+	 * @throws PorteFermeException exception si la porte est fermé
+	 * @throws PorteInexistanteDansLaPieceException exception si la porte n'est pas dans la pièce
+	 * @throws VivantAbsentDeLaPieceException
+	 */
+	public void franchir(String nomPorte) throws PorteFermeException,PorteInexistanteDansLaPieceException, VivantAbsentDeLaPieceException{
 		if(!this.getPiece().aLaPorte(nomPorte)){
 			throw new PorteInexistanteDansLaPieceException("La Porte n'existe pas.");
 		}
-		if(this.getPiece().getPorte(nomPorte).getEtat().equals(Etat.FERME)){
-			throw new PorteFermeException("La Porte est fermee");
+		Etat etatPorte = this.getPiece().getPorte(nomPorte).getEtat();
+		if(etatPorte.equals(Etat.FERME) || etatPorte.equals(Etat.VERROUILLE) || etatPorte.equals(Etat.CASSE)){
+			throw new PorteFermeException("La Porte est fermee, verrouille ou casse ");
 		}
-		this.getPiece().getPorte(nomPorte).getPieceAutreCote(this.getPiece());
+		Piece newPiece = this.getPiece().getPorte(nomPorte).getPieceAutreCote(this.getPiece());//on sotck la pièce dans laquelle on rentre
+		newPiece.entrer(this.getPiece().sortirVivant(this));//on fait sortir le vivant de la pièce actuel pour le faire rentrer dans la nouvelle pièce
+		this.piece = newPiece;//on change la pièce du vivant
 	}
 	/**
 	 * retourne la liste d'objet possédé par le vivant
