@@ -27,6 +27,7 @@ public class TestVivant{
 	static Monde mondeTest;
 	Vivant vivantTest;
 	Piece pieceTest;
+    Piece uneAutrePiece;
 	PiedDeBiche objetTest1;
 	PiedDeBiche objetTest2;
 	
@@ -144,5 +145,25 @@ public class TestVivant{
 		vivantTest.getPiece().deposer(objetTest3);
 		vivantTest.prendre(objetTest1);
 	}
+    @Test
+  public void test_franchir() throws PorteFermeException, PorteInexistanteDansLaPieceException, NomDEntiteDejaUtiliseDansLeMondeException, ActivationException{
+    Porte unePorte = new Porte ("maPorte5", m1, pieceTest, uneAutrePiece);
+    unePorte.activer();
 
+    assertThat(vivantTest.getPiece(), IsEqual.equalTo(pieceTest));
+    vivantTest.franchir(unePorte);
+    assertThat(vivantTest.getPiece(), IsEqual.equalTo(uneAutrePiece));
+  }
+
+  @Test(expected=PorteFermeException.class)
+  public void test_franchirAvecErreurPorteFermee() throws PorteFermeException, PorteInexistanteDansLaPieceException, NomDEntiteDejaUtiliseDansLeMondeException{
+    Porte unePorte = new Porte ("maPorte6", m1, pieceTest, uneAutrePiece);
+    vivantTest.franchir(unePorte);
+  }
+
+  @Test(expected=PorteInexistanteDansLaPieceException.class)
+  public void test_franchirAvecErreurPorteInexistante() throws PorteFermeException, PorteInexistanteDansLaPieceException, NomDEntiteDejaUtiliseDansLeMondeException{
+    Porte unePorte = new Porte ("maPorte7", m1, uneAutrePiece, uneAutrePiece);
+    vivantTest.franchir(unePorte);
+  }
 }
