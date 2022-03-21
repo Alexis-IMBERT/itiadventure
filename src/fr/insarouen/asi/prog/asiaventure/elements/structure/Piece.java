@@ -88,6 +88,10 @@ public class Piece extends ElementStructurel{
 		return this.portes.get(nomPorte);
 	}
 
+	public Map<String,Porte> getPortes(){
+		return this.portes;
+	}
+
 	/**
 	 * Permet de déposer un objet dans une pièce
 	 * @param obj Objet que l'on souhaite déposer dans la pièce

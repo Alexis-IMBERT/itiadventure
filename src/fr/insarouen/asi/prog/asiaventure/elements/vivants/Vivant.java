@@ -159,6 +159,10 @@ public abstract class Vivant extends Entite{
 		return pointVie;
 	}
 
+	public void setPointsDeVie(int pointVie){
+		this.pointVie=pointVie;
+    }
+
 	/**
 	 * Vérifie la présence d'un objet sur le vivant
 	 * @param objet objet dont on souhaite vérifier la présence
