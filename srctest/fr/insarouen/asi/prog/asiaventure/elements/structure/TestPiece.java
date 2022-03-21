@@ -100,4 +100,31 @@ public class TestPiece {
 		unePiece.sortirVivant(v1);
 		unePiece.sortirVivant(v1);
 	}
+
+  @Test
+  public void test_aLaPorte() {
+    MatcherAssert.assertThat(pieceTest.aLaPorte(porteTest), Is.is(true));
+    MatcherAssert.assertThat(pieceTest.aLaPorte("NomPorteTest"), Is.is(true));
+  }
+
+  @Test
+  public void test_getPorte() {
+    MatcherAssert.assertThat(pieceTest.getPorte("NomPorteTest"), IsEqual.equalTo(porteTest));
+  }
+
+  @Test
+  public void test_addPorte() throws NomDEntiteDejaUtiliseDansLeMondeException{
+    Piece uneAutrePiece = new Piece("p2", m1);
+    Porte unePorte = new Porte ("maPorte", m1, uneAutrePiece, uneAutrePiece);
+    assertThat(unePiece.aLaPorte(unePorte), is(false));
+    Porte uneAutrePorte = new Porte ("maPorte2", m1, unePiece, uneAutrePiece); //le constructeur de porte ajoute à la piece
+    assertThat(unePiece.aLaPorte(uneAutrePorte), is(true));
+  }
+
+  /*@Test
+  public void test_getPorte() throws NomDEntiteDejaUtiliseDansLeMondeException{
+    Piece uneAutrePiece = new Piece("p3", m1);
+    Porte unePorte = new Porte ("maPorte3", m1, unePiece, uneAutrePiece);
+    assertThat(unePiece.getPorte("maPorte3"), IsEqual.equalTo(unePorte));
+  }*/
 }
