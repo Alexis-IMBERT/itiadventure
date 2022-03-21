@@ -3,10 +3,7 @@ package fr.insarouen.asi.prog.asiaventure.elements.vivants;
 import fr.insarouen.asi.prog.asiaventure.elements.objets.Objet;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.Piece;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.Porte;
-import fr.insarouen.asi.prog.asiaventure.elements.vivants.Vivant;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 import fr.insarouen.asi.prog.asiaventure.Monde;
