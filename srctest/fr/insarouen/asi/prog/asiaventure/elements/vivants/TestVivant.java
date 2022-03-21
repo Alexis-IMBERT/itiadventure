@@ -11,17 +11,24 @@ import java.util.Map;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+
+import org.hamcrest.core.IsEqual;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fr.insarouen.asi.prog.asiaventure.Monde;
 import fr.insarouen.asi.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
+import fr.insarouen.asi.prog.asiaventure.elements.ActivationImpossibleException;
 import fr.insarouen.asi.prog.asiaventure.elements.objets.Objet;
 import fr.insarouen.asi.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
 import fr.insarouen.asi.prog.asiaventure.elements.objets.PiedDeBiche;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.ObjetAbsentDeLaPieceException;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.Piece;
+import fr.insarouen.asi.prog.asiaventure.elements.structure.Porte;
+import fr.insarouen.asi.prog.asiaventure.elements.structure.PorteFermeException;
+import fr.insarouen.asi.prog.asiaventure.elements.structure.PorteInexistanteDansLaPieceException;
+import fr.insarouen.asi.prog.asiaventure.elements.structure.VivantAbsentDeLaPieceException;
 
 public class TestVivant{
 	static Monde mondeTest;
@@ -146,8 +153,8 @@ public class TestVivant{
 		vivantTest.prendre(objetTest1);
 	}
 		@Test
-	public void test_franchir() throws PorteFermeException, PorteInexistanteDansLaPieceException, NomDEntiteDejaUtiliseDansLeMondeException, ActivationException{
-		Porte unePorte = new Porte ("maPorte5", m1, pieceTest, uneAutrePiece);
+	public void test_franchir() throws PorteFermeException, PorteInexistanteDansLaPieceException, NomDEntiteDejaUtiliseDansLeMondeException, ActivationImpossibleException, VivantAbsentDeLaPieceException{
+		Porte unePorte = new Porte ("maPorte5", mondeTest, pieceTest, uneAutrePiece);
 		unePorte.activer();
 
 		assertThat(vivantTest.getPiece(), IsEqual.equalTo(pieceTest));
@@ -156,14 +163,14 @@ public class TestVivant{
 	}
 
 	@Test(expected=PorteFermeException.class)
-	public void test_franchirAvecErreurPorteFermee() throws PorteFermeException, PorteInexistanteDansLaPieceException, NomDEntiteDejaUtiliseDansLeMondeException{
-		Porte unePorte = new Porte ("maPorte6", m1, pieceTest, uneAutrePiece);
+	public void test_franchirAvecErreurPorteFermee() throws PorteFermeException, PorteInexistanteDansLaPieceException, NomDEntiteDejaUtiliseDansLeMondeException, VivantAbsentDeLaPieceException{
+		Porte unePorte = new Porte ("maPorte6", mondeTest, pieceTest, uneAutrePiece);
 		vivantTest.franchir(unePorte);
 	}
 
 	@Test(expected=PorteInexistanteDansLaPieceException.class)
-	public void test_franchirAvecErreurPorteInexistante() throws PorteFermeException, PorteInexistanteDansLaPieceException, NomDEntiteDejaUtiliseDansLeMondeException{
-		Porte unePorte = new Porte ("maPorte7", m1, uneAutrePiece, uneAutrePiece);
+	public void test_franchirAvecErreurPorteInexistante() throws PorteFermeException, PorteInexistanteDansLaPieceException, NomDEntiteDejaUtiliseDansLeMondeException, VivantAbsentDeLaPieceException{
+		Porte unePorte = new Porte ("maPorte7", mondeTest, uneAutrePiece, uneAutrePiece);
 		vivantTest.franchir(unePorte);
 	}
 }
