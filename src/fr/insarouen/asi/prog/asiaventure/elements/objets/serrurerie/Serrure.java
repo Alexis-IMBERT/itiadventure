@@ -11,7 +11,7 @@ import fr.insarouen.asi.prog.asiaventure.elements.objets.Objet;
  */
 public class Serrure extends Objet implements Activable {
 	private Etat etat=Etat.VERROUILLE;
-	boolean PremireCle=true;
+	private boolean PremireCle=true;
 	Clef clef;
 
 	/**

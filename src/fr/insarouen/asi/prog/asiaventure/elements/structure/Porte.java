@@ -37,7 +37,7 @@ public class Porte extends ElementStructurel implements Activable{
     */
 	private Etat etat = Etat.OUVERT;
 
-	private Serrure serrure;
+	private Serrure serrure=null;
 
 	void setEtat(Etat etat) {
 		this.etat = etat;
@@ -86,10 +86,9 @@ public class Porte extends ElementStructurel implements Activable{
         return true;
 		//pass;-> serrure
     }
-	/*
     public Serrure getSerrure(){
         return this.serrure;
-    }*/
+    }
     public Piece getPieceAutreCote(Piece piece){
         if (piece.equals(this.pieceA)){
             return this.pieceB;

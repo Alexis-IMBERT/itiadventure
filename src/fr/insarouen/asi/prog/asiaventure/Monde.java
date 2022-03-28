@@ -2,13 +2,13 @@ package fr.insarouen.asi.prog.asiaventure;
 
 import fr.insarouen.asi.prog.asiaventure.elements.Entite;
 import java.util.Map;
-
+import java.io.Serializable;
 import java.util.HashMap;
 
 /**
  * Classe représentant un monde
  */
-public class Monde{
+public class Monde extends Object implements Serializable{
 	//Attributs
 	/**
 	 * Attribut du type chaine de caractère pour défnir le nom du monde
