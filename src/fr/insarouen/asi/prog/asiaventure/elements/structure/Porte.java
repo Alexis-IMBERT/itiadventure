@@ -7,6 +7,7 @@ import fr.insarouen.asi.prog.asiaventure.elements.ActivationImpossibleAvecObjetE
 import fr.insarouen.asi.prog.asiaventure.elements.ActivationImpossibleException;
 import fr.insarouen.asi.prog.asiaventure.elements.Activable;
 import fr.insarouen.asi.prog.asiaventure.elements.objets.Objet;
+import fr.insarouen.asi.prog.asiaventure.elements.objets.serrurerie.Serrure;
 
 /**
  * Classe Porte basé sur la classe abstraite ElementStructurel
@@ -36,6 +37,8 @@ public class Porte extends ElementStructurel implements Activable{
     */
 	private Etat etat = Etat.OUVERT;
 
+	private Serrure serrure;
+
 	void setEtat(Etat etat) {
 		this.etat = etat;
 	}
@@ -45,6 +48,12 @@ public class Porte extends ElementStructurel implements Activable{
 		super(nom,monde);
 		this.pieceA = pieceA;
 		this.pieceB = pieceB;
+	}
+	public Porte(String nom,Monde monde, Serrure serrure, Piece pieceA, Piece pieceB) throws NomDEntiteDejaUtiliseDansLeMondeException{
+		super(nom, monde);
+		this.pieceA = pieceA;
+		this.pieceB = pieceB;
+		this.serrure= serrure;
 	}
 
 	//Méthodes
