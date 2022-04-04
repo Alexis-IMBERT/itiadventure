@@ -4,9 +4,9 @@ import fr.insarouen.asi.prog.asiaventure.elements.objets.Objet;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.Piece;
 import fr.insarouen.asi.prog.asiaventure.elements.vivants.Vivant;
 
-public class ConditionDeFinVivantDansPieceEtPossedeObjets extends ConditionDeFin{
+public class ConditionDeFinVivantDansPieceEtPossedeObjetsAvecConjonction extends ConditionDeFin{
 	private ConditionDeFinConjonctionDeConditionDeFin cf = null ;
-	public ConditionDeFinVivantDansPieceEtPossedeObjets(EtatDuJeu etatDuJeu, Vivant vivant, Piece piece, Objet... objets) {
+	public ConditionDeFinVivantDansPieceEtPossedeObjetsAvecConjonction(EtatDuJeu etatDuJeu, Vivant vivant, Piece piece, Objet... objets) {
 		super(etatDuJeu);
 		this.cf = new ConditionDeFinConjonctionDeConditionDeFin(etatDuJeu, new ConditionDeFinVivantDansPiece(etatDuJeu, vivant, piece), new ConditionDeFinVivantPossedeObjets(etatDuJeu, vivant, objets));
 	}
