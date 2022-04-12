@@ -15,34 +15,34 @@ import fr.insarouen.asi.prog.asiaventure.elements.structure.VivantAbsentDeLaPiec
 
 public class JoueurHumain extends Vivant{
     //Attributs
-	private String ordre;
+    private String ordre;
     //Constructeur
-	public JoueurHumain(String nom, Monde monde, int pointVie, int pointForce, Piece piece, Objet... objets)
-			throws NomDEntiteDejaUtiliseDansLeMondeException {
-		super(nom, monde, pointVie, pointForce, piece, objets);
-	}
-	//Methodes
+    public JoueurHumain(String nom, Monde monde, int pointVie, int pointForce, Piece piece, Objet... objets)
+            throws NomDEntiteDejaUtiliseDansLeMondeException {
+        super(nom, monde, pointVie, pointForce, piece, objets);
+    }
+    //Methodes
     public void setOrdre(String ordre){
-		this.ordre=ordre;
-	}
-	void commandePrendre(String nomObjet) throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException{
-		this.prendre(nomObjet);
-	}
-	void commandePoser(String nomObjet) throws ObjetNonPossedeParLeVivantException{
-		this.deposer(nomObjet);
-	}
-	void commandeFranchir(String nomPorte) throws PorteInexistanteDansLaPieceException, VivantAbsentDeLaPieceException, PorteFermeException{
-		this.franchir(nomPorte);
-	}
-	void commandeOuvrirPorte(String nomPorte,String nomObjet) throws PorteInexistanteDansLaPieceException, VivantAbsentDeLaPieceException, PorteFermeException, ActivationImpossibleAvecObjetException, ActivationImpossibleException{
-		this.getPiece().getPorte(nomPorte).activerAvec(this.getObjet(nomObjet));
-	}
-	void commandeOuvrirPorte(String nomPorte) throws ActivationException, PorteInexistanteDansLaPieceException{
-		this.getPiece().getPorte(nomPorte).activer();
-		
-	}
-	public void executer() throws CommandeImpossiblePourLeVivantException{
-		
-	}
-	
+        this.ordre=ordre;
+    }
+    void commandePrendre(String nomObjet) throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException{
+        this.prendre(nomObjet);
+    }
+    void commandePoser(String nomObjet) throws ObjetNonPossedeParLeVivantException{
+        this.deposer(nomObjet);
+    }
+    void commandeFranchir(String nomPorte) throws PorteInexistanteDansLaPieceException, VivantAbsentDeLaPieceException, PorteFermeException{
+        this.franchir(nomPorte);
+    }
+    void commandeOuvrirPorte(String nomPorte,String nomObjet) throws PorteInexistanteDansLaPieceException, VivantAbsentDeLaPieceException, PorteFermeException, ActivationImpossibleAvecObjetException, ActivationImpossibleException{
+        this.getPiece().getPorte(nomPorte).activerAvec(this.getObjet(nomObjet));
+    }
+    void commandeOuvrirPorte(String nomPorte) throws ActivationException, PorteInexistanteDansLaPieceException{
+        this.getPiece().getPorte(nomPorte).activer();
+        
+    }
+    public void executer() throws CommandeImpossiblePourLeVivantException{
+        
+    }
+    
 }

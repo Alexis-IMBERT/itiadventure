@@ -1,22 +1,32 @@
 package fr.insarouen.asi.prog.asiaventure.elements.vivants;
 
 /**
- * classe d'exception de commande impossible à effectuer sur le vivant en question
+ * classe d'exception de commande impossible à effectuer sur le vivant en
+ * question
+ * 
+ * @author Alexis IMBERT et Mehdi Saissi Hassani
  */
-public class CommandeImpossiblePourLeVivantException extends VivantException{
-	/**
-	 * constructeur d'exception de d'exception de commande impossible a faire sur le vivant
-	 */
-	public CommandeImpossiblePourLeVivantException(){
-		super();
-	}
+public class CommandeImpossiblePourLeVivantException extends VivantException {
+    /**
+     * constructeur d'exception de d'exception de commande impossible a faire sur le
+     * vivant
+     */
+    public CommandeImpossiblePourLeVivantException() {
+        super();
+    }
 
-	/**
-	 * constructeur d'exception de d'exception de commande impossible a faire sur le vivant
-	 * 
-	 * @param msg chaine de caractère passé en paramètre pour expliquer l'erreur
-	 */
-	public CommandeImpossiblePourLeVivantException(String msg){
-		super(msg);
-	}
+    /**
+     * constructeur d'exception de d'exception de commande impossible a faire sur le
+     * vivant
+     * 
+     * @param msg chaine de caractère passé en paramètre pour expliquer l'erreur
+     */
+    public CommandeImpossiblePourLeVivantException(String msg) {
+        super(msg);
+    }
+
+    @Override
+    public String toString() {
+        return "CommandeImpossiblePourLeVivantException []";
+    }
 }
