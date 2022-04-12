@@ -31,12 +31,8 @@ public class Monstre extends Vivant{
     //Methodes
     public void executer() throws ObjetNonPossedeParLeVivantException, ObjetAbsentDeLaPieceException, ObjetNonDeplacableException, PorteInexistanteDansLaPieceException, VivantAbsentDeLaPieceException, PorteFermeException{
         while(!this.estMort()){
-            //echanger les objets du vivant avec les objets de la piece
             echangerObjetDansPiece();
-            //choisir une porte au hasard dans la pièce et la franchir (même si fermé donc try catch)
             franchir();
-            //quand on franchit une porte on perd un point de vie 
-            this.setPointsDeVie(this.getPointVie()-1);
         }
     }
     private void echangerObjetDansPiece() throws ObjetNonPossedeParLeVivantException, ObjetAbsentDeLaPieceException, ObjetNonDeplacableException{
@@ -51,11 +47,11 @@ public class Monstre extends Vivant{
         }
     }
     private void franchir() throws PorteInexistanteDansLaPieceException, VivantAbsentDeLaPieceException, PorteFermeException{
-        Piece piece = this.getPiece();
         List<Porte> portes = new ArrayList<Porte>();
-        portes.addAll(piece.getPortes().values());
+        portes.addAll(this.getPiece().getPortes().values());
         int taille = portes.size();
         int numeroPorte  = (int)(Math.random()*taille);
         this.franchir(portes.get(numeroPorte));
+        this.setPointsDeVie(this.getPointVie()-1);
     }
 }

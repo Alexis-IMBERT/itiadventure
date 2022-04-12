@@ -125,7 +125,7 @@ public abstract class Vivant extends Entite{
 	 * @return la liste d'objet
 	 */
 	public Map<String,Objet> getObjets(){
-		return objets;
+		return Map.copyOf(objets);
 	}
 	
 	/**

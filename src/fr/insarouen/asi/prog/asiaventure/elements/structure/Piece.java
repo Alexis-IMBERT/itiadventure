@@ -89,7 +89,7 @@ public class Piece extends ElementStructurel{
 	}
 
 	public Map<String,Porte> getPortes(){
-		return this.portes;
+		return Map.copyOf(this.portes);
 	}
 
 	/**
@@ -105,7 +105,7 @@ public class Piece extends ElementStructurel{
 	 * @return la liste des objets de la pièce
 	 */
 	public Map<String,Objet> getObjets(){
-		return objets;
+		return Map.copyOf(objets);
 	}
 	
 	/**
@@ -162,7 +162,7 @@ public class Piece extends ElementStructurel{
 	 * @return la liste des vivants contenue dans la pièce
 	 */
 	public Map<String,Vivant> getVivants(){
-		return this.vivants;
+		return Map.copyOf(this.vivants);
 	}
 	
 	/**

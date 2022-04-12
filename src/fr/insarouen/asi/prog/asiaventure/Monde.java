@@ -66,6 +66,6 @@ public class Monde extends Object implements Serializable{
 	}
 
 	public Map<String,Entite> getEntites(){
-		return this.entites;
+		return Map.copyOf(this.entites);
 	}
 }
