@@ -167,10 +167,13 @@ public class Simulateur {
 		}
 	}
 
-	private Objet[] lisObjets(String[] leStrings, int debut){
+	private Objet[] lisObjets(String[] leStrings, int debut)throws IOException{
 		Objet[] res = new Objet[leStrings.length-debut];
 		for(int i=debut; i<leStrings.length;i++){
 			res[i-debut] = (Objet)this.monde.getEntite(leStrings[i]);
+			if (res[i-debut]==null){
+				throw new IOException("Le nom de l'objet n'existe pas");
+			}
 		}
 		return res;
 	}
