@@ -35,7 +35,7 @@ public class Coffre extends Objet implements Activable{
     }
 
 	@Override
-	public boolean ActivableAvec(Objet objet) {
+	public boolean activableAvec(Objet objet) {
 		return false;
 	}
 

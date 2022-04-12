@@ -8,7 +8,7 @@ import fr.insarouen.asi.prog.asiaventure.elements.objets.Objet;
 
  */
 public interface Activable{
-	public boolean ActivableAvec(Objet objet);
+	public boolean activableAvec(Objet objet);
 	public void activer() throws ActivationException;
 	public void activerAvec(Objet objet) throws ActivationException;
 }

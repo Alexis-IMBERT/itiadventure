@@ -4,6 +4,7 @@ import fr.insarouen.asi.prog.asiaventure.Monde;
 import fr.insarouen.asi.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 import fr.insarouen.asi.prog.asiaventure.elements.Activable;
 import fr.insarouen.asi.prog.asiaventure.elements.ActivationException;
+import fr.insarouen.asi.prog.asiaventure.elements.ActivationImpossibleAvecObjetException;
 import fr.insarouen.asi.prog.asiaventure.elements.Etat;
 import fr.insarouen.asi.prog.asiaventure.elements.objets.Objet;
 /**
@@ -48,7 +49,7 @@ public class Serrure extends Objet implements Activable {
 	 * @return boolean : true si la serrure correspond à la clé donnée
 	 */
 	@Override
-	public boolean ActivableAvec(Objet objet) {
+	public boolean activableAvec(Objet objet) {
 		return this.clef.equals(objet);
 	}
 
@@ -67,8 +68,8 @@ public class Serrure extends Objet implements Activable {
 	 * @throws ActivationException
 	 */
 	@Override
-	public void activerAvec(Objet objet) throws ActivationException {
-		if(this.clef.equals(objet)){
+	public void activerAvec(Objet objet) throws ActivationImpossibleAvecObjetException {
+		if(this.activableAvec(objet)){
 			if(this.etat.equals(Etat.VERROUILLE)){
 				this.etat = Etat.DEVERROUILLE;
 			}
@@ -77,7 +78,7 @@ public class Serrure extends Objet implements Activable {
 			}
 		}
 		else{
-			throw new ActivationException("L'objet donnée n'est pas la bonne clée pour ouvrir la porte");
+			throw new ActivationImpossibleAvecObjetException("L'objet donnée n'est pas la bonne clée pour ouvrir la porte");
 		}
 	}
 

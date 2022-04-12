@@ -7,6 +7,8 @@ import fr.insarouen.asi.prog.asiaventure.elements.ActivationImpossibleAvecObjetE
 import fr.insarouen.asi.prog.asiaventure.elements.ActivationImpossibleException;
 import fr.insarouen.asi.prog.asiaventure.elements.Activable;
 import fr.insarouen.asi.prog.asiaventure.elements.objets.Objet;
+import fr.insarouen.asi.prog.asiaventure.elements.objets.PiedDeBiche;
+import fr.insarouen.asi.prog.asiaventure.elements.objets.serrurerie.Clef;
 import fr.insarouen.asi.prog.asiaventure.elements.objets.serrurerie.Serrure;
 
 /**
@@ -79,12 +81,44 @@ public class Porte extends ElementStructurel implements Activable{
 		}
     }
 	
-    public void activerAvec(Objet obj) throws ActivationImpossibleAvecObjetException,ActivationImpossibleException{
-        //pass;-> serrure
+    public void activerAvec(Objet objet) throws ActivationImpossibleAvecObjetException,ActivationImpossibleException{
+		if(this.activableAvec(objet)){
+			if (objet instanceof Clef){
+				switch(this.etat){
+					case CASSE:
+						throw new ActivationImpossibleException("La porte est cassé");
+					case FERME:
+						this.etat=Etat.VERROUILLE;
+						if(this.getSerrure()!=null){this.getSerrure().activerAvec(objet);}
+						break;
+					case OUVERT:
+						this.etat=Etat.VERROUILLE;
+						if(this.getSerrure()!=null){this.getSerrure().activerAvec(objet);}
+						break;
+					case VERROUILLE:
+						this.etat = Etat.OUVERT;
+						if(this.getSerrure()!=null){this.getSerrure().activerAvec(objet);}
+						break;
+					default:
+						throw new ActivationImpossibleException("La porte n'est pas dans un état cohérent");
+					
+				}
+			}
+			else{if(objet instanceof PiedDeBiche){
+				if(this.etat==Etat.VERROUILLE|this.etat==Etat.FERME){
+					this.etat=Etat.CASSE;
+				}
+				else{
+					throw new ActivationImpossibleException("La porte n'est n'y verrouille ni ferme");
+				}
+			}}
+		}
+		else{
+			throw new ActivationImpossibleAvecObjetException("Vous ne pouvez pas activer la porte avec cet objet");
+		}
     }
-    public boolean ActivableAvec(Objet obj){
-        return true;
-		//pass;-> serrure
+    public boolean activableAvec(Objet objet){
+        return ((this.getSerrure()!=null ? this.getSerrure().activableAvec(objet) : false)| (objet instanceof PiedDeBiche));
     }
     public Serrure getSerrure(){
         return this.serrure;
