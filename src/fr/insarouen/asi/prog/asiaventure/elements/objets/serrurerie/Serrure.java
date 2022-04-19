@@ -77,7 +77,7 @@ public class Serrure extends Objet implements Activable {
 		do {
 			nombre = (int) (Math.random() * 256);
 			nom = Integer.toString(nombre);
-		} while (monde.getEntite((String) nom).equals(null));
+		} while (monde.getEntite((String) nom)!=null);
 		return nom;
 	}
 

@@ -4,7 +4,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.hamcrest.core.IsEqual;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fr.insarouen.asi.prog.asiaventure.Monde;
@@ -14,16 +13,12 @@ import fr.insarouen.asi.prog.asiaventure.elements.ActivationImpossibleAvecObjetE
 import fr.insarouen.asi.prog.asiaventure.elements.Etat;
 
 public class TestSerrure {
-	static Monde monde = null;
+	Monde monde = null;
 	Serrure serrure = null;
-
-	@BeforeClass
-	public static void avantClasse() {
-		monde = new Monde("mondeTest");
-	}
 
 	@Before
 	public void avantTest() throws NomDEntiteDejaUtiliseDansLeMondeException {
+		monde = new Monde("mondeTest");
 		serrure = new Serrure("nom", monde);
 	}
 
@@ -32,15 +27,15 @@ public class TestSerrure {
 
 		assertThat(serrure.getNom(), IsEqual.equalTo("nom"));
 		assertThat(serrure.getMonde(), IsEqual.equalTo(monde));
-		// Serrure serrure2 = new Serrure(monde);
-		// assertThat(serrure2.getMonde(), IsEqual.equalTo(monde));
+		Serrure serrure2 = new Serrure(monde);
+		assertThat(serrure2.getMonde(), IsEqual.equalTo(monde));
 	}
-/*
+
 	@Test(expected = NomDEntiteDejaUtiliseDansLeMondeException.class)
 	public void test_constructeur_avecException() throws NomDEntiteDejaUtiliseDansLeMondeException {
-		Serrure serrure3 = new Serrure("nom", monde);
+		new Serrure("nom", monde);
 	}
-*/
+
 	@Test(expected = ActivationException.class)
 	public void test_activer() throws ActivationException {
 		this.serrure.activer();

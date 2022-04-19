@@ -4,24 +4,18 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.hamcrest.core.IsEqual;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fr.insarouen.asi.prog.asiaventure.Monde;
 import fr.insarouen.asi.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 
-/** */
 public class TestClef {
-	static Monde monde;
+	Monde monde;
 	Clef clef;
-
-	@BeforeClass
-	public static void avantClasse() {
-		monde = new Monde("nomDuMonde");
-	}
 
 	@Before
 	public void avantTest() throws NomDEntiteDejaUtiliseDansLeMondeException {
+		monde = new Monde("nomDuMonde");
 		clef = new Clef("nom", monde);
 	}
 
@@ -33,7 +27,7 @@ public class TestClef {
 
 	@Test(expected = NomDEntiteDejaUtiliseDansLeMondeException.class)
 	public void test_constructeur_avecException() throws NomDEntiteDejaUtiliseDansLeMondeException {
-		Clef clef2 = new Clef("nom", monde);
+		new Clef("nom", monde);
 	}
 
 	@Test

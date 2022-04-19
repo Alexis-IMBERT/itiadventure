@@ -4,7 +4,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.hamcrest.core.IsEqual;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fr.insarouen.asi.prog.asiaventure.Monde;
@@ -13,16 +12,12 @@ import fr.insarouen.asi.prog.asiaventure.elements.ActivationException;
 import fr.insarouen.asi.prog.asiaventure.elements.Etat;
 
 public class TestCoffre {
-	static Monde monde;
+	Monde monde;
 	Coffre coffre;
-
-	@BeforeClass
-	public static void avantClasse() {
-		monde = new Monde("nomDuMonde");
-	}
 
 	@Before
 	public void avantTest() throws NomDEntiteDejaUtiliseDansLeMondeException {
+		monde = new Monde("nomDuMonde");
 		coffre = new Coffre("nom", monde);
 	}
 
@@ -31,12 +26,12 @@ public class TestCoffre {
 		assertThat(coffre.getNom(), IsEqual.equalTo("nom"));
 		assertThat(coffre.getMonde(), IsEqual.equalTo(monde));
 	}
-/*
+
 	@Test(expected = NomDEntiteDejaUtiliseDansLeMondeException.class)
 	public void test_constructeur_avecException() throws NomDEntiteDejaUtiliseDansLeMondeException {
-		Coffre coffre2 = new Coffre("nom", monde);
+		new Coffre("nom", monde);
 	}
-*/
+
 	@Test
 	public void test_estDeplacable() {
 		assertThat(coffre.estDeplacable(), IsEqual.equalTo(false));
