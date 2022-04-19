@@ -79,10 +79,10 @@ public class Monstre extends Vivant {
                 .filter(Objet::estDeplacable).collect(Collectors.toList());
         List<Objet> ObjetsDuMonstre = (List<Objet>) this.getObjets().values();
         for (Iterator<Objet> i = ObjetsDuMonstre.iterator(); i.hasNext();) {
-            this.deposer((Objet) i.next());
+            this.deposer(i.next());
         }
         for (Iterator<Objet> i = objetDeplaceable.iterator(); i.hasNext();) {
-            this.prendre((Objet) i.next());
+            this.prendre(i.next());
         }
     }
 

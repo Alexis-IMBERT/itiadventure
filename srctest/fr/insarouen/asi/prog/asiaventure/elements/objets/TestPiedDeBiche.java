@@ -25,12 +25,12 @@ public class TestPiedDeBiche {
 	}
 
 	@Test
-	public void testConstructeur(){
+	public void test_Constructeur(){
 		assertThat(piedDeBicheTest, IsEqual.equalTo(piedDeBicheTest));
 	}
 
 	@Test
-	public void testestDeplacable(){
+	public void test_estDeplacable(){
 		assertThat(piedDeBicheTest.estDeplacable(),is(true));
 	}
 }

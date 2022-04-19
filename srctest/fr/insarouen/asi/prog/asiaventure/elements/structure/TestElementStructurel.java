@@ -1,4 +1,4 @@
-package fr.insarouen.asi.prog.asiaventure.elements.objets.serrurerie;
+package fr.insarouen.asi.prog.asiaventure.elements.structure;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -10,10 +10,9 @@ import org.junit.Test;
 import fr.insarouen.asi.prog.asiaventure.Monde;
 import fr.insarouen.asi.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 
-/** */
-public class TestClef {
+public class TestElementStructurel {
 	static Monde monde;
-	Clef clef;
+	ElementStructurel elementStructurel;
 
 	@BeforeClass
 	public static void avantClasse() {
@@ -22,22 +21,21 @@ public class TestClef {
 
 	@Before
 	public void avantTest() throws NomDEntiteDejaUtiliseDansLeMondeException {
-		clef = new Clef("nom", monde);
+		elementStructurel = new ElementStructurel("nom", monde) {
+		};
 	}
 
 	@Test
 	public void test_constructeur() {
-		assertThat(clef.getNom(), IsEqual.equalTo("nom"));
-		assertThat(clef.getMonde(), IsEqual.equalTo(monde));
+		assertThat(elementStructurel.getNom(), IsEqual.equalTo("nom"));
+		assertThat(elementStructurel.getMonde(), IsEqual.equalTo(monde));
 	}
-
+/* 
 	@Test(expected = NomDEntiteDejaUtiliseDansLeMondeException.class)
 	public void test_constructeur_avecException() throws NomDEntiteDejaUtiliseDansLeMondeException {
-		Clef clef2 = new Clef("nom", monde);
-	}
+		ElementStructurel elementStructurel2 = new ElementStructurel("nom", monde) {
 
-	@Test
-	public void test_estDeplacable() {
-		assertThat(clef.estDeplacable(), IsEqual.equalTo(true));
+		};
 	}
+*/
 }

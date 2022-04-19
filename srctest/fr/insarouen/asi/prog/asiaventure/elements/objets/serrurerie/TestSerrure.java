@@ -29,34 +29,35 @@ public class TestSerrure {
 
 	@Test
 	public void testConstructeur() throws NomDEntiteDejaUtiliseDansLeMondeException {
-		Serrure serrure2 = new Serrure(monde);
-		assertThat(serrure2.getMonde(), IsEqual.equalTo(monde));
+
 		assertThat(serrure.getNom(), IsEqual.equalTo("nom"));
 		assertThat(serrure.getMonde(), IsEqual.equalTo(monde));
+		// Serrure serrure2 = new Serrure(monde);
+		// assertThat(serrure2.getMonde(), IsEqual.equalTo(monde));
 	}
-
+/*
 	@Test(expected = NomDEntiteDejaUtiliseDansLeMondeException.class)
 	public void test_constructeur_avecException() throws NomDEntiteDejaUtiliseDansLeMondeException {
 		Serrure serrure3 = new Serrure("nom", monde);
 	}
-
+*/
 	@Test(expected = ActivationException.class)
-	public void test_activer() throws ActivationException{
+	public void test_activer() throws ActivationException {
 		this.serrure.activer();
 	}
 
 	@Test
-	public void test_estDeplacable(){
+	public void test_estDeplacable() {
 		assertThat(serrure.estDeplacable(), IsEqual.equalTo(false));
 	}
 
 	@Test
-	public void test_getEtat(){
+	public void test_getEtat() {
 		assertThat(serrure.getEtat(), IsEqual.equalTo(Etat.VERROUILLE));
 	}
 
 	@Test
-	public void test_creerClef() throws NomDEntiteDejaUtiliseDansLeMondeException{
+	public void test_creerClef() throws NomDEntiteDejaUtiliseDansLeMondeException {
 		Clef clef = serrure.creerClef();
 		assertThat(clef.getNom(), IsEqual.equalTo("nomcle"));
 		assertThat(clef.getMonde(), IsEqual.equalTo(monde));
@@ -65,13 +66,15 @@ public class TestSerrure {
 	}
 
 	@Test
-	public void test_activableAvec() throws NomDEntiteDejaUtiliseDansLeMondeException{
+	public void test_activableAvec() throws NomDEntiteDejaUtiliseDansLeMondeException {
 		Clef clef = serrure.creerClef();
 		assertThat(serrure.activableAvec(clef), IsEqual.equalTo(true));
 		assertThat(serrure.activableAvec(serrure), IsEqual.equalTo(false));
 	}
+
 	@Test
-	public void test_activerAvec() throws NomDEntiteDejaUtiliseDansLeMondeException, ActivationImpossibleAvecObjetException{
+	public void test_activerAvec()
+			throws NomDEntiteDejaUtiliseDansLeMondeException, ActivationImpossibleAvecObjetException {
 		Clef clef = serrure.creerClef();
 		assertThat(serrure.getEtat(), IsEqual.equalTo(Etat.VERROUILLE));
 		serrure.activerAvec(clef);

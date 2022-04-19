@@ -13,11 +13,11 @@ import fr.insarouen.asi.prog.asiaventure.elements.ActivationException;
 import fr.insarouen.asi.prog.asiaventure.elements.Etat;
 
 public class TestCoffre {
-	Monde monde;
+	static Monde monde;
 	Coffre coffre;
 
 	@BeforeClass
-	public void avantClasse() {
+	public static void avantClasse() {
 		monde = new Monde("nomDuMonde");
 	}
 
@@ -31,24 +31,28 @@ public class TestCoffre {
 		assertThat(coffre.getNom(), IsEqual.equalTo("nom"));
 		assertThat(coffre.getMonde(), IsEqual.equalTo(monde));
 	}
+/*
 	@Test(expected = NomDEntiteDejaUtiliseDansLeMondeException.class)
-	public void test_constructeur_avecException()throws NomDEntiteDejaUtiliseDansLeMondeException{
+	public void test_constructeur_avecException() throws NomDEntiteDejaUtiliseDansLeMondeException {
 		Coffre coffre2 = new Coffre("nom", monde);
 	}
+*/
 	@Test
-	public void test_estDeplacable(){
+	public void test_estDeplacable() {
 		assertThat(coffre.estDeplacable(), IsEqual.equalTo(false));
 	}
+
 	@Test
-	public void test_activer()throws ActivationException{
+	public void test_activer() throws ActivationException {
 		assertThat(coffre.getEtat(), IsEqual.equalTo(Etat.FERME));
 		coffre.activer();
 		assertThat(coffre.getEtat(), IsEqual.equalTo(Etat.OUVERT));
 		coffre.activer();
 		assertThat(coffre.getEtat(), IsEqual.equalTo(Etat.FERME));
 	}
+
 	@Test(expected = ActivationException.class)
-	public void test_activer_avec() throws ActivationException{
+	public void test_activer_avec() throws ActivationException {
 		coffre.activerAvec(coffre);
 	}
 }

@@ -33,6 +33,7 @@ public class Main extends Object {
                     if (simulateur != null) {
                         sauvegarderPartie(simulateur);
                     }
+                    break;
                 case 4:
                     simulateur = chargerSauvegarde();
                     break;
