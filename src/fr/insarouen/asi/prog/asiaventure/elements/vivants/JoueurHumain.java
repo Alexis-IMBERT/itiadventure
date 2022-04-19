@@ -12,7 +12,7 @@ import fr.insarouen.asi.prog.asiaventure.elements.structure.Piece;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.PorteFermeException;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.PorteInexistanteDansLaPieceException;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.VivantAbsentDeLaPieceException;
-
+/** */
 public class JoueurHumain extends Vivant{
     //Attributs
     private String ordre;
@@ -43,6 +43,9 @@ public class JoueurHumain extends Vivant{
     }
     public void executer() throws CommandeImpossiblePourLeVivantException{
         
+    }
+    public String getOrdre() {
+        return ordre;
     }
     
 }
