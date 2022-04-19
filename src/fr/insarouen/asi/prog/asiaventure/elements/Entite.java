@@ -1,5 +1,7 @@
 package fr.insarouen.asi.prog.asiaventure.elements;
 
+import java.io.Serializable;
+
 import fr.insarouen.asi.prog.asiaventure.Monde;
 import fr.insarouen.asi.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 
@@ -8,7 +10,7 @@ import fr.insarouen.asi.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeExcepti
  * 
  * @author Alexis Imbert et Mehdi Saissi Hassani
  */
-public abstract class Entite {
+public abstract class Entite implements Serializable{
 
     // Attributs
     /**

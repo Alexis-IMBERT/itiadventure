@@ -39,7 +39,7 @@ public class TestObjets {
 		Objet deuxiemeObjet = new Objet("Objet1", MondeTest1){ 
 			public boolean estDeplacable(){
 				return false;
-			} 
+			}
 		};
 	}
 

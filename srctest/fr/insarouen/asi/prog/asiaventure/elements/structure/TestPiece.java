@@ -8,7 +8,6 @@ import fr.insarouen.asi.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeExcepti
 import fr.insarouen.asi.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
 
 import org.junit.Test;
-import org.hamcrest.core.Is;
 import org.hamcrest.core.IsEqual;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -16,7 +15,6 @@ import org.junit.BeforeClass;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
-import org.hamcrest.MatcherAssert;
 
 
 public class TestPiece {
