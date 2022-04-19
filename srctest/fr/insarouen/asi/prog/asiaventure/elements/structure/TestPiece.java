@@ -1,29 +1,30 @@
 package fr.insarouen.asi.prog.asiaventure.elements.structure;
 
-import fr.insarouen.asi.prog.asiaventure.Monde;
-import fr.insarouen.asi.prog.asiaventure.elements.objets.*;
-
-import fr.insarouen.asi.prog.asiaventure.elements.vivants.Vivant;
-import fr.insarouen.asi.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
-import fr.insarouen.asi.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
-
-import org.junit.Test;
-import org.hamcrest.core.IsEqual;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
+import org.hamcrest.core.IsEqual;
+import org.junit.Before;
+import org.junit.Test;
+
+import fr.insarouen.asi.prog.asiaventure.Monde;
+import fr.insarouen.asi.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
+import fr.insarouen.asi.prog.asiaventure.elements.objets.Objet;
+import fr.insarouen.asi.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
+import fr.insarouen.asi.prog.asiaventure.elements.objets.PiedDeBiche;
+import fr.insarouen.asi.prog.asiaventure.elements.vivants.Vivant;
+
 public class TestPiece {
 
-	public static Monde m1;
-	public static Piece unePiece;
-	public static Vivant v1;
+	public Monde m1;
+	public Piece unePiece;
+	public Vivant v1;
+	public Piece pieceTest;
+	public Piece pieceB;
+	public Porte porteTest;
 
-	@BeforeClass
-	public static void chargement() throws NomDEntiteDejaUtiliseDansLeMondeException {
+	@Before
+	public void avantTest() throws NomDEntiteDejaUtiliseDansLeMondeException {
 		m1 = new Monde("m1");
 		String nom = new String("Mehdi");
 		int pv = 1;
@@ -36,14 +37,9 @@ public class TestPiece {
 		unePiece = new Piece("p1", m1);
 		v1 = new Vivant(nom, m1, pv, pf, unePiece, objs) {
 		};
-
-	}
-
-	@Before
-	public void avantTest() throws NomDEntiteDejaUtiliseDansLeMondeException {
-		Piece pieceTest = new Piece("Piecetest", m1);
-		Piece pieceB = new Piece("PieceB", m1);
-		Porte porteTest = new Porte("PorteTest", m1, pieceTest, pieceB);
+		pieceTest = new Piece("Piecetest", m1);
+		pieceB = new Piece("PieceB", m1);
+		porteTest = new Porte("PorteTest", m1, pieceTest, pieceB);
 	}
 
 	@Test
@@ -52,13 +48,12 @@ public class TestPiece {
 		assertThat(unePiece.getMonde(), IsEqual.equalTo(m1));
 	}
 
-	/*
-	 * @Test(expected=NomDEntiteDejaUtiliseDansLeMondeException.class)
-	 * public void test_constructeur_avecException() throws
-	 * NomDEntiteDejaUtiliseDansLeMondeException{
-	 * Piece deuPiece = new Piece("p1", m1){};
-	 * }
-	 */
+	@Test(expected = NomDEntiteDejaUtiliseDansLeMondeException.class)
+	public void test_constructeur_avecException() throws NomDEntiteDejaUtiliseDansLeMondeException {
+		new Piece("p1", m1) {
+		};
+	}
+
 	@Test
 	public void test_contientObjet() throws NomDEntiteDejaUtiliseDansLeMondeException, ObjetAbsentDeLaPieceException,
 			ObjetNonDeplacableException {
@@ -112,37 +107,40 @@ public class TestPiece {
 		unePiece.sortirVivant(v1);
 	}
 
-/*
-	@Test
-	public void test_aLaPorte() {
-	MatcherAssert.assertThat(pieceTest.aLaPorte(porteTest), Is.is(true));
-	MatcherAssert.assertThat(pieceTest.aLaPorte("NomPorteTest"), Is.is(true));
-	}
-*/
-/*	
-	@Test
-	public void test_getPorte() {
-	MatcherAssert.assertThat(pieceTest.getPorte("NomPorteTest"),
-	IsEqual.equalTo(porteTest));
-	}
-*/
-/*
-	@Test
-	public void test_addPorte() throws NomDEntiteDejaUtiliseDansLeMondeException {
-		Piece uneAutrePiece = new Piece("p2", m1);
-		Porte unePorte = new Porte("maPorte", m1, uneAutrePiece, uneAutrePiece);
-		assertThat(unePiece.aLaPorte(unePorte), is(false));
-		Porte uneAutrePorte = new Porte("maPorte2", m1, unePiece, uneAutrePiece); // le constructeur de porte ajoute à
-																					// la piece
-		assertThat(unePiece.aLaPorte(uneAutrePorte), is(true));
-	}
-*/
-/*
-	@Test
-		public void test_getPorte() throws NomDEntiteDejaUtiliseDansLeMondeException{
-		Piece uneAutrePiece = new Piece("p3", m1);
-		Porte unePorte = new Porte ("maPorte3", m1, unePiece, uneAutrePiece);
-		assertThat(unePiece.getPorte("maPorte3"), IsEqual.equalTo(unePorte));
-	}
-	*/
+	/*
+	 * @Test
+	 * public void test_aLaPorte() {
+	 * assertThat(pieceTest.aLaPorte(porteTest), Is.is(true));
+	 * assertThat(pieceTest.aLaPorte("NomPorteTest"), Is.is(true));
+	 * }
+	 */
+	/*
+	 * @Test
+	 * public void test_getPorte() {
+	 * assertThat(pieceTest.getPorte("NomPorteTest"),
+	 * IsEqual.equalTo(porteTest));
+	 * }
+	 */
+	/*
+	 * @Test
+	 * public void test_addPorte() throws NomDEntiteDejaUtiliseDansLeMondeException
+	 * {
+	 * Piece uneAutrePiece = new Piece("p2", m1);
+	 * Porte unePorte = new Porte("maPorte", m1, uneAutrePiece, uneAutrePiece);
+	 * assertThat(unePiece.aLaPorte(unePorte), is(false));
+	 * Porte uneAutrePorte = new Porte("maPorte2", m1, unePiece, uneAutrePiece); //
+	 * le constructeur de porte ajoute à
+	 * // la piece
+	 * assertThat(unePiece.aLaPorte(uneAutrePorte), is(true));
+	 * }
+	 */
+	/*
+	 * @Test
+	 * public void test_getPorte() throws NomDEntiteDejaUtiliseDansLeMondeException
+	 * {
+	 * Piece uneAutrePiece = new Piece("p3", m1);
+	 * Porte unePorte = new Porte("maPorte3", m1, unePiece, uneAutrePiece);
+	 * assertThat(unePiece.getPorte("maPorte3"), IsEqual.equalTo(unePorte));
+	 * }
+	 */
 }

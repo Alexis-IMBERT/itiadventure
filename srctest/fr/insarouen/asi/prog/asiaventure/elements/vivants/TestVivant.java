@@ -1,5 +1,7 @@
 package fr.insarouen.asi.prog.asiaventure.elements.vivants;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
@@ -9,17 +11,11 @@ import static org.junit.Assert.assertTrue;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-
-import org.hamcrest.core.IsEqual;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fr.insarouen.asi.prog.asiaventure.Monde;
 import fr.insarouen.asi.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
-import fr.insarouen.asi.prog.asiaventure.elements.ActivationImpossibleException;
 import fr.insarouen.asi.prog.asiaventure.elements.objets.Objet;
 import fr.insarouen.asi.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
 import fr.insarouen.asi.prog.asiaventure.elements.objets.PiedDeBiche;
@@ -38,13 +34,9 @@ public class TestVivant {
 	PiedDeBiche objetTest1;
 	PiedDeBiche objetTest2;
 
-	@BeforeClass
-	public static void avantClasse() {
-		mondeTest = new Monde("mondeTest");
-	}
-
 	@Before
 	public void avantTest() throws NomDEntiteDejaUtiliseDansLeMondeException {
+		mondeTest = new Monde("mondeTest");
 		pieceTest = new Piece("pieceTest", mondeTest);
 		objetTest1 = new PiedDeBiche("objetTest1", mondeTest);
 		// objetTest1.setEstDeplacable(true);
@@ -156,27 +148,30 @@ public class TestVivant {
 		vivantTest.getPiece().deposer(objetTest3);
 		vivantTest.prendre(objetTest1);
 	}
-/*
-	@Test
-	public void test_franchir() throws PorteFermeException, PorteInexistanteDansLaPieceException,
-			NomDEntiteDejaUtiliseDansLeMondeException, ActivationImpossibleException, VivantAbsentDeLaPieceException {
-		Porte unePorte = new Porte("maPorte5", mondeTest, pieceTest, uneAutrePiece);
-		unePorte.activer();
 
-		assertThat(vivantTest.getPiece(), IsEqual.equalTo(pieceTest));
-		vivantTest.franchir(unePorte);
-		assertThat(vivantTest.getPiece(), IsEqual.equalTo(uneAutrePiece));
-	}
-*/
-/* 
-	@Test(expected = PorteFermeException.class)
-	public void test_franchirAvecErreurPorteFermee() throws PorteFermeException,
-			PorteInexistanteDansLaPieceException,
-			NomDEntiteDejaUtiliseDansLeMondeException, VivantAbsentDeLaPieceException {
-		Porte unePorte = new Porte("maPorte6", mondeTest, pieceTest, uneAutrePiece);
-		vivantTest.franchir(unePorte);
-	}
- */
+	/*
+	 * @Test
+	 * public void test_franchir() throws PorteFermeException,
+	 * PorteInexistanteDansLaPieceException,
+	 * NomDEntiteDejaUtiliseDansLeMondeException, ActivationImpossibleException,
+	 * VivantAbsentDeLaPieceException {
+	 * Porte unePorte = new Porte("maPorte5", mondeTest, pieceTest, uneAutrePiece);
+	 * unePorte.activer();
+	 * 
+	 * assertThat(vivantTest.getPiece(), IsEqual.equalTo(pieceTest));
+	 * vivantTest.franchir(unePorte);
+	 * assertThat(vivantTest.getPiece(), IsEqual.equalTo(uneAutrePiece));
+	 * }
+	 */
+	/*
+	 * @Test(expected = PorteFermeException.class)
+	 * public void test_franchirAvecErreurPorteFermee() throws PorteFermeException,
+	 * PorteInexistanteDansLaPieceException,
+	 * NomDEntiteDejaUtiliseDansLeMondeException, VivantAbsentDeLaPieceException {
+	 * Porte unePorte = new Porte("maPorte6", mondeTest, pieceTest, uneAutrePiece);
+	 * vivantTest.franchir(unePorte);
+	 * }
+	 */
 	@Test(expected = PorteInexistanteDansLaPieceException.class)
 	public void test_franchirAvecErreurPorteInexistante()
 			throws PorteFermeException, PorteInexistanteDansLaPieceException, NomDEntiteDejaUtiliseDansLeMondeException,

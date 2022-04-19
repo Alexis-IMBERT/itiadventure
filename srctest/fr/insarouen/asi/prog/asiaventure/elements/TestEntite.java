@@ -1,24 +1,21 @@
 package fr.insarouen.asi.prog.asiaventure.elements;
-import org.junit.Test;
-import org.junit.BeforeClass;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
+import org.junit.Test;
 
 import fr.insarouen.asi.prog.asiaventure.Monde;
 import fr.insarouen.asi.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 
 public class TestEntite{
 	//Attribut
-	private static Monde mondeTest ;
+	private Monde mondeTest ;
 	private Entite entiteTest ;
-	@BeforeClass
-	public static void avantClassesTest(){
-		mondeTest = new Monde("mondeTest");
-	}
 
 	@Before
 	public void avantTest() throws NomDEntiteDejaUtiliseDansLeMondeException{
+		mondeTest = new Monde("mondeTest");
 		entiteTest = new Entite("EntiteTest",mondeTest){}; //acolade pour creer une classe anonyme pcq la classe Entite est abstraite
 	}
 

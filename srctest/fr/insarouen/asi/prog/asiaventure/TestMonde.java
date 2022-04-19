@@ -1,13 +1,11 @@
 package fr.insarouen.asi.prog.asiaventure;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertEquals;
 
 import org.hamcrest.core.IsEqual;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-
 import org.junit.Before;
+import org.junit.Test;
 
 import fr.insarouen.asi.prog.asiaventure.elements.Entite;
 
@@ -23,7 +21,7 @@ public class TestMonde {
   public void testGetNom() {
     assertThat(mondeTest.getNom(), IsEqual.equalTo("MondeTest"));
   }
-/* 
+
   @Test
   public void TestGetEntite() {
     try {
@@ -35,8 +33,7 @@ public class TestMonde {
     }
     ;
   }
- */
-/* 
+
   @Test
   public void TestAjouter() throws NomDEntiteDejaUtiliseDansLeMondeException, EntiteDejaDansUnAutreMondeException {
     Monde mondeTest = new Monde("MondeTest");
@@ -45,22 +42,16 @@ public class TestMonde {
     assertEquals(mondeTest.getEntite("Entite1"), entite);
     ;
   }
- */
-/* 
+
   @Test(expected = NomDEntiteDejaUtiliseDansLeMondeException.class)
   public void TestAjouter_avecExceptionDejaPresent()
       throws NomDEntiteDejaUtiliseDansLeMondeException, EntiteDejaDansUnAutreMondeException {
-    try {
-      Monde mondeTest = new Monde("MondeTest");
-      Entite entite = new Entite("Entite1", mondeTest) {
-      };
-
-      mondeTest.ajouter(entite);
-    } catch (Exception e) {
-    }
-    ;
+    Monde mondeTest = new Monde("MondeTest");
+    Entite entite = new Entite("Entite1", mondeTest) {
+    };
+    mondeTest.ajouter(entite);
   }
- */
+
   @Test(expected = EntiteDejaDansUnAutreMondeException.class)
   public void TestAjouter_avecExceptionAutreMonde()
       throws NomDEntiteDejaUtiliseDansLeMondeException, EntiteDejaDansUnAutreMondeException {
