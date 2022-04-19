@@ -2,6 +2,7 @@ package fr.insarouen.asi.prog.asiaventure.elements;
 
 import java.io.Serializable;
 
+import fr.insarouen.asi.prog.asiaventure.EntiteDejaDansUnAutreMondeException;
 import fr.insarouen.asi.prog.asiaventure.Monde;
 import fr.insarouen.asi.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 
@@ -10,7 +11,7 @@ import fr.insarouen.asi.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeExcepti
  * 
  * @author Alexis Imbert et Mehdi Saissi Hassani
  */
-public abstract class Entite implements Serializable{
+public abstract class Entite implements Serializable {
 
     // Attributs
     /**
@@ -28,11 +29,13 @@ public abstract class Entite implements Serializable{
      * Constructeur d'une entité
      */
     public Entite(String nom, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
-        if (monde.getEntites().containsKey(nom)) {
-            throw new NomDEntiteDejaUtiliseDansLeMondeException();
-        }
         this.nom = nom;
         this.monde = monde;
+        try {
+            monde.ajouter(this);
+        } catch (EntiteDejaDansUnAutreMondeException e) {
+            throw new Error("Entite existe déjà dans un autre monde" + e);
+        }
     }
 
     // methodes
