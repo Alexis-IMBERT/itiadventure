@@ -7,6 +7,7 @@ import org.junit.runners.Suite.SuiteClasses;
 import fr.insarouen.asi.prog.asiaventure.elements.objets.TestCoffre;
 import fr.insarouen.asi.prog.asiaventure.elements.objets.TestObjets;
 import fr.insarouen.asi.prog.asiaventure.elements.objets.TestPiedDeBiche;
+import fr.insarouen.asi.prog.asiaventure.elements.objets.serrurerie.TestClef;
 import fr.insarouen.asi.prog.asiaventure.elements.objets.serrurerie.TestSerrure;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.TestElementStructurel;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.TestPiece;
@@ -23,6 +24,7 @@ import fr.insarouen.asi.prog.asiaventure.elements.vivants.TestVivant;
 		TestPorte.class,
 		TestSerrure.class,
 		TestCoffre.class,
+		TestClef.class,
 		TestElementStructurel.class
 })
 public class AllTestsElements {
