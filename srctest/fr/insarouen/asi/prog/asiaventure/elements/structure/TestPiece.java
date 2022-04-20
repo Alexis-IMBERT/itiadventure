@@ -23,6 +23,7 @@ public class TestPiece {
 	public Piece Piece3;
 	public Vivant vivant;
 	public Porte porteTest;
+	PiedDeBiche PiedDeBiche1;
 
 	@Before
 	public void avantTest() throws NomDEntiteDejaUtiliseDansLeMondeException {
@@ -35,8 +36,11 @@ public class TestPiece {
 		objs[0] = new PiedDeBiche("pdb1", monde);
 		objs[1] = new PiedDeBiche("pdb2", monde);
 
+		PiedDeBiche1 = new PiedDeBiche("PiedDeBiche1", monde);
+
 		Piece1 = new Piece("p1", monde);
-		vivant = new Vivant(nom, monde, pv, pf, Piece1, objs) {};
+		vivant = new Vivant(nom, monde, pv, pf, Piece1, objs) {
+		};
 		Piece2 = new Piece("Piece2", monde);
 		Piece3 = new Piece("Piece3", monde);
 		porteTest = new Porte("PorteTest", monde, Piece2, Piece3);
@@ -50,28 +54,37 @@ public class TestPiece {
 
 	@Test(expected = NomDEntiteDejaUtiliseDansLeMondeException.class)
 	public void test_constructeur_avecException() throws NomDEntiteDejaUtiliseDansLeMondeException {
-		new Piece("p1", monde) {};
+		new Piece("p1", monde) {
+		};
 	}
 
 	@Test
 	public void test_contientObjet() throws NomDEntiteDejaUtiliseDansLeMondeException, ObjetAbsentDeLaPieceException,
 			ObjetNonDeplacableException {
-		PiedDeBiche unPiedDeBiche = new PiedDeBiche("PiedDeBiche1", monde);
-		assertThat(Piece1.contientObjet(unPiedDeBiche), is(false));
+		assertThat(Piece1.contientObjet(PiedDeBiche1), is(false));
+		assertThat(Piece1.contientObjet("PiedDeBiche1"), is(false));
 
-		Piece1.deposer(unPiedDeBiche);
-		assertThat(Piece1.contientObjet(unPiedDeBiche), is(true));
+		Piece1.deposer(PiedDeBiche1);
+		assertThat(Piece1.contientObjet(PiedDeBiche1), is(true));
+		assertThat(Piece1.contientObjet("PiedDeBiche1"), is(true));
 
-		Piece1.retirer(unPiedDeBiche);
-		assertThat(Piece1.contientObjet(unPiedDeBiche), is(false));
+		Piece1.retirer(PiedDeBiche1);
+		assertThat(Piece1.contientObjet(PiedDeBiche1), is(false));
+		assertThat(Piece1.contientObjet("PiedDeBiche1"), is(false));
 
+		Piece1.deposer(PiedDeBiche1);
+		assertThat(Piece1.contientObjet(PiedDeBiche1), is(true));
+		assertThat(Piece1.contientObjet("PiedDeBiche1"), is(true));
+
+		Piece1.retirer("PiedDeBiche1");
+		assertThat(Piece1.contientObjet(PiedDeBiche1), is(false));
+		assertThat(Piece1.contientObjet("PiedDeBiche1"), is(false));
 	}
 
 	@Test(expected = ObjetAbsentDeLaPieceException.class)
 	public void test_retirerObjet_avecExceptionAbsentPiece() throws NomDEntiteDejaUtiliseDansLeMondeException,
 			ObjetAbsentDeLaPieceException, ObjetNonDeplacableException {
-		PiedDeBiche unPiedDeBiche = new PiedDeBiche("PiedDeBiche2", monde);
-		Piece1.retirer(unPiedDeBiche);
+		Piece1.retirer(PiedDeBiche1);
 	}
 
 	@Test(expected = ObjetNonDeplacableException.class)
@@ -89,25 +102,40 @@ public class TestPiece {
 	}
 
 	@Test
+	public void test_addPorte() throws NomDEntiteDejaUtiliseDansLeMondeException {
+		Piece uneAutrePiece = new Piece("p2", monde);
+		Porte unePorte = new Porte("maPorte", monde, uneAutrePiece, uneAutrePiece);
+		assertThat(Piece1.aLaPorte(unePorte), is(false));
+		Porte uneAutrePorte = new Porte("maPorte2", monde, Piece1, uneAutrePiece); // le constructeur de porte ajoute à
+		// la piece
+		assertThat(Piece1.aLaPorte(uneAutrePorte), is(true));
+	}
+
+	@Test
 	public void test_contientVivant() throws VivantAbsentDeLaPieceException {
 		assertThat(Piece1.contientVivant(vivant), is(true));
 		assertThat(Piece1.contientVivant(vivant.getNom()), is(true));
 
 		Piece1.sortirVivant(vivant);
 		assertThat(Piece1.contientVivant(vivant), is(false));
+		assertThat(Piece1.contientVivant(vivant.getNom()), is(false));
 
 		Piece1.entrer(vivant);
 		assertThat(Piece1.contientVivant(vivant), is(true));
+		assertThat(Piece1.contientVivant(vivant.getNom()), is(true));
 
 		Piece1.sortirVivant(vivant.getNom());
 		assertThat(Piece1.contientVivant(vivant), is(false));
+		assertThat(Piece1.contientVivant(vivant.getNom()), is(false));
 
 		Piece1.entrer(vivant);
 		assertThat(Piece1.contientVivant(vivant), is(true));
+		assertThat(Piece1.contientVivant(vivant.getNom()), is(true));
+
 	}
 
 	@Test(expected = VivantAbsentDeLaPieceException.class)
-	public void test_contientVivant_exceptionVivantabsent() throws VivantAbsentDeLaPieceException {
+	public void test_sortirVivant_exceptionVivantabsent() throws VivantAbsentDeLaPieceException {
 		Piece1.sortirVivant(vivant);
 		Piece1.sortirVivant(vivant);
 	}
@@ -126,13 +154,4 @@ public class TestPiece {
 		assertThat(this.Piece3.getPorte("PorteTest"), IsEqual.equalTo(porteTest));
 	}
 
-	@Test
-	public void test_addPorte() throws NomDEntiteDejaUtiliseDansLeMondeException {
-		Piece uneAutrePiece = new Piece("p2", monde);
-		Porte unePorte = new Porte("maPorte", monde, uneAutrePiece, uneAutrePiece);
-		assertThat(Piece1.aLaPorte(unePorte), is(false));
-		Porte uneAutrePorte = new Porte("maPorte2", monde, Piece1, uneAutrePiece); // le constructeur de porte ajoute à
-		// la piece
-		assertThat(Piece1.aLaPorte(uneAutrePorte), is(true));
-	}
 }
