@@ -11,11 +11,13 @@ import static org.junit.Assert.assertTrue;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.hamcrest.core.IsEqual;
 import org.junit.Before;
 import org.junit.Test;
 
 import fr.insarouen.asi.prog.asiaventure.Monde;
 import fr.insarouen.asi.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
+import fr.insarouen.asi.prog.asiaventure.elements.ActivationImpossibleException;
 import fr.insarouen.asi.prog.asiaventure.elements.objets.Objet;
 import fr.insarouen.asi.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
 import fr.insarouen.asi.prog.asiaventure.elements.objets.PiedDeBiche;
@@ -33,6 +35,7 @@ public class TestVivant {
 	Piece uneAutrePiece;
 	PiedDeBiche objetTest1;
 	PiedDeBiche objetTest2;
+	Porte porte;
 
 	@Before
 	public void avantTest() throws NomDEntiteDejaUtiliseDansLeMondeException {
@@ -43,6 +46,8 @@ public class TestVivant {
 		objetTest2 = new PiedDeBiche("objetTest2", mondeTest);
 		vivantTest = new Vivant("vivantTest", mondeTest, 10, 10, pieceTest, objetTest1) {
 		};
+		uneAutrePiece = new Piece("uneAutrePiece", mondeTest);
+		porte = new Porte("porte", mondeTest, pieceTest, uneAutrePiece);
 	}
 
 	@Test
@@ -76,6 +81,12 @@ public class TestVivant {
 		assertEquals(pieceTest, vivantTest.getPiece());
 	}
 
+	@Test(expected = NomDEntiteDejaUtiliseDansLeMondeException.class)
+	public void test_constructeur_avecException() throws NomDEntiteDejaUtiliseDansLeMondeException {
+		new Vivant("vivantTest", mondeTest, 10, 10, pieceTest) {
+		};
+	}
+
 	@Test
 	public void estMortTest() {
 		assertFalse(vivantTest.estMort());
@@ -106,12 +117,8 @@ public class TestVivant {
 	}
 
 	@Test
-	public void deposerObjetTest() {
-		try {
-			vivantTest.deposer(objetTest1);
-		} catch (ObjetNonPossedeParLeVivantException e) {
-			e.printStackTrace();
-		}
+	public void deposerObjetTest() throws ObjetNonPossedeParLeVivantException {
+		vivantTest.deposer(objetTest1);
 		assertThat(vivantTest.possede(objetTest1), is(false));
 		assertThat(vivantTest.possede("objetTest1"), is(false));
 	}
@@ -149,34 +156,32 @@ public class TestVivant {
 		vivantTest.prendre(objetTest1);
 	}
 
-	/*
-	 * @Test
-	 * public void test_franchir() throws PorteFermeException,
-	 * PorteInexistanteDansLaPieceException,
-	 * NomDEntiteDejaUtiliseDansLeMondeException, ActivationImpossibleException,
-	 * VivantAbsentDeLaPieceException {
-	 * Porte unePorte = new Porte("maPorte5", mondeTest, pieceTest, uneAutrePiece);
-	 * unePorte.activer();
-	 * 
-	 * assertThat(vivantTest.getPiece(), IsEqual.equalTo(pieceTest));
-	 * vivantTest.franchir(unePorte);
-	 * assertThat(vivantTest.getPiece(), IsEqual.equalTo(uneAutrePiece));
-	 * }
-	 */
-	/*
-	 * @Test(expected = PorteFermeException.class)
-	 * public void test_franchirAvecErreurPorteFermee() throws PorteFermeException,
-	 * PorteInexistanteDansLaPieceException,
-	 * NomDEntiteDejaUtiliseDansLeMondeException, VivantAbsentDeLaPieceException {
-	 * Porte unePorte = new Porte("maPorte6", mondeTest, pieceTest, uneAutrePiece);
-	 * vivantTest.franchir(unePorte);
-	 * }
-	 */
+	@Test
+	public void test_franchir() throws PorteFermeException,
+			PorteInexistanteDansLaPieceException,
+			NomDEntiteDejaUtiliseDansLeMondeException, ActivationImpossibleException,
+			VivantAbsentDeLaPieceException {
+		Porte porte = new Porte("maPorte5", mondeTest, pieceTest, uneAutrePiece);
+
+		assertThat(vivantTest.getPiece(), IsEqual.equalTo(pieceTest));
+		vivantTest.franchir(porte);
+		assertThat(vivantTest.getPiece(), IsEqual.equalTo(uneAutrePiece));
+	}
+
+	@Test(expected = PorteFermeException.class)
+	public void test_franchirAvecErreurPorteFermee() throws PorteFermeException,
+			PorteInexistanteDansLaPieceException,
+			NomDEntiteDejaUtiliseDansLeMondeException, VivantAbsentDeLaPieceException, ActivationImpossibleException {
+		Porte porte = new Porte("maPorte6", mondeTest, pieceTest, uneAutrePiece);
+		porte.activer();
+		vivantTest.franchir(porte);
+	}
+
 	@Test(expected = PorteInexistanteDansLaPieceException.class)
 	public void test_franchirAvecErreurPorteInexistante()
 			throws PorteFermeException, PorteInexistanteDansLaPieceException, NomDEntiteDejaUtiliseDansLeMondeException,
 			VivantAbsentDeLaPieceException {
-		Porte unePorte = new Porte("maPorte7", mondeTest, uneAutrePiece, uneAutrePiece);
-		vivantTest.franchir(unePorte);
+		Porte porte = new Porte("maPorte78", mondeTest, uneAutrePiece, uneAutrePiece);
+		vivantTest.franchir(porte);
 	}
 }
