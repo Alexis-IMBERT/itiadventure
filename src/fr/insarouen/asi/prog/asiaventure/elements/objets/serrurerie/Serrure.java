@@ -144,6 +144,7 @@ public class Serrure extends Objet implements Activable {
 	 *
 	 * @return false dans tout les cas
 	 */
+	@Override
 	public boolean estDeplacable() {
 		return false;
 	}
