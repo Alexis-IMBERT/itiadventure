@@ -61,6 +61,8 @@ public class Porte extends ElementStructurel implements Activable {
         super(nom, monde);
         this.pieceA = pieceA;
         this.pieceB = pieceB;
+        pieceA.addPorte(this);
+        pieceB.addPorte(this);
     }
 
     /**
@@ -80,6 +82,8 @@ public class Porte extends ElementStructurel implements Activable {
         this.pieceA = pieceA;
         this.pieceB = pieceB;
         this.serrure = serrure;
+        pieceA.addPorte(this);
+        pieceB.addPorte(this);
     }
 
     // Méthodes
