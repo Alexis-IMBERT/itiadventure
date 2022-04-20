@@ -63,6 +63,7 @@ public class Coffre extends Objet implements Activable {
 	 *
 	 * @return false
 	 */
+	@Override
 	public boolean estDeplacable() {
 		return false;
 	}
