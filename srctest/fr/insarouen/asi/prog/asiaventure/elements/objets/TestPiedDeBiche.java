@@ -11,18 +11,22 @@ import fr.insarouen.asi.prog.asiaventure.Monde;
 import fr.insarouen.asi.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 
 public class TestPiedDeBiche {
-	Monde mondeTest;
+	Monde monde;
 	PiedDeBiche piedDeBicheTest;
 
 	@Before
 	public void avantTest() throws NomDEntiteDejaUtiliseDansLeMondeException {
-		mondeTest = new Monde("mondeTest");
-		piedDeBicheTest = new PiedDeBiche("piedDeBicheTest", mondeTest);
+		monde = new Monde("monde");
+		piedDeBicheTest = new PiedDeBiche("piedDeBicheTest", monde);
 	}
 
 	@Test
 	public void test_Constructeur() {
 		assertThat(piedDeBicheTest, IsEqual.equalTo(piedDeBicheTest));
+	}
+	@Test(expected = NomDEntiteDejaUtiliseDansLeMondeException.class)
+	public void test_constructeur_avecException() throws NomDEntiteDejaUtiliseDansLeMondeException{
+		new PiedDeBiche("piedDeBicheTest", monde);
 	}
 
 	@Test
