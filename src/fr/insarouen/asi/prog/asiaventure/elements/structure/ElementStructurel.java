@@ -22,6 +22,10 @@ public abstract class ElementStructurel extends Entite {
         super(nom, monde);
     }
 
+    /**
+     * Méthode toString permettant de transformer l'objet en chaine de caractère
+     */
+    @Override
     public String toString() {
         return String.format("ElementStructurel de nom %s dans le monde %s", this.getNom(), this.getMonde().toString());
     }
