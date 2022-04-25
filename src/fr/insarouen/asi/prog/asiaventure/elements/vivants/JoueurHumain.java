@@ -1,5 +1,10 @@
 package fr.insarouen.asi.prog.asiaventure.elements.vivants;
 
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.lang.reflect.InvocationTargetException;
+
+import fr.insarouen.asi.prog.asiaventure.elements.Executable;
 import fr.insarouen.asi.prog.asiaventure.Monde;
 import fr.insarouen.asi.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 import fr.insarouen.asi.prog.asiaventure.elements.ActivationException;
@@ -13,7 +18,7 @@ import fr.insarouen.asi.prog.asiaventure.elements.structure.PorteFermeException;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.PorteInexistanteDansLaPieceException;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.VivantAbsentDeLaPieceException;
 /** */
-public class JoueurHumain extends Vivant{
+public class JoueurHumain extends Vivant implements Executable{
     //Attributs
     private String ordre;
     //Constructeur
@@ -39,13 +44,29 @@ public class JoueurHumain extends Vivant{
     }
     void commandeOuvrirPorte(String nomPorte) throws ActivationException, PorteInexistanteDansLaPieceException{
         this.getPiece().getPorte(nomPorte).activer();
-        
     }
-    public void executer() throws CommandeImpossiblePourLeVivantException{
-        
+
+    @Override
+    public void executer() throws CommandeImpossiblePourLeVivantException, Throwable{
+        String[] splitOrdre = this.ordre.split(" ");
+        int nombreElem = splitOrdre.length - 1;
+        Class[] typeParametre = new Class[nombreElem];
+        Arrays.fill(typeParametre,String.class);
+        String[] parametreEffectif = Arrays.copyOfRange(splitOrdre,1,nombreElem);
+        Method method = this.getClass().getMethod("commande"+splitOrdre[0],typeParametre);
+        if(method==null){
+            throw new CommandeImpossiblePourLeVivantException("Introspection n'a pas trouver la méthode");
+        }
+        try{
+            method.invoke(this,(Object[])parametreEffectif);
+        }
+        catch(InvocationTargetException e){
+            throw e.getTargetException();
+        }
+        catch(Exception e){
+        }
     }
     public String getOrdre() {
         return ordre;
     }
-    
 }

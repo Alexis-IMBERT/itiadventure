@@ -13,6 +13,7 @@ import fr.insarouen.asi.prog.asiaventure.elements.structure.TestElementStructure
 import fr.insarouen.asi.prog.asiaventure.elements.structure.TestPiece;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.TestPorte;
 import fr.insarouen.asi.prog.asiaventure.elements.vivants.TestVivant;
+import fr.insarouen.asi.prog.asiaventure.elements.vivants.TestJoueurHumain;
 
 @RunWith(Suite.class)
 @SuiteClasses({
@@ -25,7 +26,8 @@ import fr.insarouen.asi.prog.asiaventure.elements.vivants.TestVivant;
 		TestSerrure.class,
 		TestCoffre.class,
 		TestClef.class,
-		TestElementStructurel.class
+		TestElementStructurel.class,
+		TestJoueurHumain.class,
 })
 public class AllTestsElements {
 }

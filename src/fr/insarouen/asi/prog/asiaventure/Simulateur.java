@@ -221,4 +221,24 @@ public class Simulateur {
     public String toString() {
         return "Simulateur [conditionDeFins=" + conditionDeFins + ", etatDuJeu=" + etatDuJeu + ", monde=" + monde + "]";
     }
+
+    public EtatDuJeu executerUnTour() throws java.lang.Throwable{
+        //récupérer les joueur humain
+        JoueurHumain[] joueurHumains = null;
+        //afficher sa situation
+        for(JoueurHumain joueurHumain : joueurHumains){
+            System.out.println(joueurHumain.toString());
+        }
+        //pour chaque Executable appeler la méthode executer
+        // v´erifier chaque condition de fin et retourner ENCOURS si aucune n’est vérifiée, sinon retourner l’état
+        return null;
+    }
+
+    public EtatDuJeu executerJusquALaFin() throws java.lang.Throwable{
+        EtatDuJeu etatDuJeu = EtatDuJeu.ENCOURS;
+        while(etatDuJeu == EtatDuJeu.ENCOURS){
+            etatDuJeu = executerUnTour();
+        }
+        return etatDuJeu;
+    }
 }

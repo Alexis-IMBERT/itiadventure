@@ -246,8 +246,20 @@ public abstract class Vivant extends Entite {
     /**
      * recode de la fonction toString
      */
+    /* @Override
     public String toString() {
-        return String.format("Vivant %s du monde %s a %d points de vie et %d points de Forces est dans la piece %s",
-                this.getNom(), this.getMonde().toString(), this.getPointVie(), this.getPointForce(), this.getPiece());
+        return String.format("Vivant %s du monde %s a %d points de vie et %d points de Forces est dans la piece %s et a les objet %s",
+                this.getNom(), this.getMonde().toString(), this.getPointVie(), this.getPointForce(), this.getPiece(),
+                afficherObjet(this.objets));
     }
+
+    private String afficherObjet(Map<String, Objet> objets){
+        List<String> = 
+        String resultat = "Objets : ";
+        for(Objet objet : objets){
+            resultat = String.format("%s,%s",resultat,objet.toString());
+        }
+        return resultat;
+    }
+     */
 }
