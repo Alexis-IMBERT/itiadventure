@@ -95,7 +95,7 @@ public abstract class Vivant extends Entite {
      */
     public void deposer(String nomObj) throws ObjetNonPossedeParLeVivantException {
         if (!this.objets.containsKey(nomObj)) {
-            throw new ObjetNonPossedeParLeVivantException();
+            throw new ObjetNonPossedeParLeVivantException(String.format("Le vivant ne peut pas déposer l'objet %s car il ne l'a pas", nomObj));
         }
         Objet tmp = objets.get(nomObj);
         objets.remove(nomObj);
