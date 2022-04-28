@@ -12,8 +12,8 @@ import fr.insarouen.asi.prog.asiaventure.elements.objets.serrurerie.TestSerrure;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.TestElementStructurel;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.TestPiece;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.TestPorte;
-import fr.insarouen.asi.prog.asiaventure.elements.vivants.TestVivant;
 import fr.insarouen.asi.prog.asiaventure.elements.vivants.TestJoueurHumain;
+import fr.insarouen.asi.prog.asiaventure.elements.vivants.TestVivant;
 
 @RunWith(Suite.class)
 @SuiteClasses({
