@@ -23,27 +23,64 @@ public class Main extends Object {
     public static void main(String[] args) throws Throwable {
         boolean quitter = false;
         Simulateur simulateur = null;
+        Scanner sc = new Scanner(System.in);
         while (!quitter) {
             afficherMenu();
-            switch (choisirAction()) {
+            int resutltat = choisirAction(sc);
+            switch (resutltat) {
+                case 1:
+                    jouer(simulateur, sc);
+                    break;
                 case 2:
-                    simulateur = chargerFichierDescription();
+                    System.out.println("Dans le main Switch 2");
+                    simulateur = chargerFichierDescription(sc);
                     break;
                 case 3:
                     if (simulateur != null) {
-                        sauvegarderPartie(simulateur);
+                        sauvegarderPartie(simulateur,sc);
                     }
                     break;
                 case 4:
-                    simulateur = chargerSauvegarde();
+                    simulateur = chargerSauvegarde(sc);
                     break;
                 case 5:
                     quitter = true;
                     break;
                 default:
-                    System.err.println("Erreur : Le nombre saisie est invalide.");
+                    System.out.println("Erreur : Le nombre saisie est invalide.");
                     break;
             }
+        }
+        sc.close();
+    }
+
+    private static void jouer(Simulateur simulateur, Scanner sc)throws Throwable{
+        boolean onContinue = true;
+        boolean choix = true;
+        if(simulateur==null){
+            System.out.println("Aucune partie n'est chargé : veuillez soit charger un fichier de description soit une partie");
+            main(new String[0]);
+        }
+        while(onContinue){
+            simulateur.executerUnTour(sc);
+            System.out.println("Voulez-vous continuez ?(O/N)");
+            while(choix){
+                String tmp = sc.next();
+                switch(tmp){
+                    case "O":
+                        choix = false;
+                        break;
+                    case "N":
+                        main(new String[0]);
+                        onContinue=false;
+                        choix=false;
+                        break;
+                    default:
+                        System.out.println("Merci d'indiquez O ou N");
+                        break;
+                }
+            }
+            
         }
     }
 
@@ -55,9 +92,9 @@ public class Main extends Object {
      * @throws FileNotFoundException
      * @throws IOException
      */
-    private static Simulateur chargerFichierDescription()
+    private static Simulateur chargerFichierDescription(Scanner sc)
             throws NomDEntiteDejaUtiliseDansLeMondeException, FileNotFoundException, IOException {
-        return new Simulateur(new BufferedReader(new FileReader(lireNomFichier())));
+        return new Simulateur(new BufferedReader(new FileReader(lireNomFichier(sc))));
     }
 
     /**
@@ -66,8 +103,8 @@ public class Main extends Object {
      * @param simulateur
      * @throws IOException
      */
-    private static void sauvegarderPartie(Simulateur simulateur) throws IOException {
-        ObjectOutputStream flot = new ObjectOutputStream(new FileOutputStream(lireNomFichier()));
+    private static void sauvegarderPartie(Simulateur simulateur,Scanner sc) throws IOException {
+        ObjectOutputStream flot = new ObjectOutputStream(new FileOutputStream(lireNomFichier(sc)));
         simulateur.enregistrer(flot);
         flot.flush();
     }
@@ -80,8 +117,8 @@ public class Main extends Object {
      * @throws FileNotFoundException
      * @throws IOException
      */
-    private static Simulateur chargerSauvegarde() throws ClassNotFoundException, FileNotFoundException, IOException {
-        return new Simulateur(new ObjectInputStream(new FileInputStream(lireNomFichier())));
+    private static Simulateur chargerSauvegarde(Scanner sc) throws ClassNotFoundException, FileNotFoundException, IOException {
+        return new Simulateur(new ObjectInputStream(new FileInputStream(lireNomFichier(sc))));
     }
 
     /**
@@ -89,11 +126,9 @@ public class Main extends Object {
      * 
      * @return
      */
-    private static int choisirAction() {
+    private static int choisirAction(Scanner sc) {
         System.out.print("Faites votre choix : ");
-        Scanner sc = new Scanner(System.in);
         int res = sc.nextInt();
-        sc.close();
         return res;
     }
 
@@ -115,11 +150,9 @@ public class Main extends Object {
      * 
      * @return
      */
-    private static String lireNomFichier() {
-        System.out.print("Entrer un nom de fichier: ");
-        Scanner sc = new Scanner(System.in);
-        String res = sc.next();
-        sc.close();
+    private static String lireNomFichier(Scanner scanner) {
+        System.out.println("Entrer un nom de fichier: ");
+        String res = scanner.next();
         return res;
     }
 

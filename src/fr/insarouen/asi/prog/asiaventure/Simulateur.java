@@ -230,17 +230,17 @@ public class Simulateur {
 		return "Simulateur [conditionDeFins=" + conditionDeFins + ", etatDuJeu=" + etatDuJeu + ", monde=" + monde + "]";
 	}
 
-	public EtatDuJeu executerUnTour() throws java.lang.Throwable {
+	public EtatDuJeu executerUnTour(Scanner sc) throws java.lang.Throwable {
+		String ordre;
 		// récupérer les joueur humain
 		Collection<JoueurHumain> joueurHumains = this.monde.getJoueurHumain();
 		// afficher sa situation
 		for (JoueurHumain joueurHumain : joueurHumains) {
 			System.out.println(joueurHumain.toString());
 			System.out.println("Veuillez saisir votre ordre");
-			Scanner scanner = new Scanner(System.in);
-			String ordre = scanner.nextLine();
+			ordre = sc.nextLine();
+			System.out.println(String.format("ordre : %s, ",ordre));
 			joueurHumain.setOrdre(ordre);
-			scanner.close();
 		}
 		// pour chaque Executable appeler la méthode executer
 		Collection<Executable> lExecutables = this.monde.getExecutables();
@@ -259,10 +259,10 @@ public class Simulateur {
 		return resultat;
 	}
 
-	public EtatDuJeu executerJusquALaFin() throws java.lang.Throwable {
+	public EtatDuJeu executerJusquALaFin(Scanner scanner) throws java.lang.Throwable {
 		EtatDuJeu etatDuJeu = EtatDuJeu.ENCOURS;
 		while (etatDuJeu == EtatDuJeu.ENCOURS) {
-			etatDuJeu = executerUnTour();
+			etatDuJeu = executerUnTour(scanner);
 		}
 		return etatDuJeu;
 	}

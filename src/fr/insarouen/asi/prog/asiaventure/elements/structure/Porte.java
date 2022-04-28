@@ -208,7 +208,7 @@ public class Porte extends ElementStructurel implements Activable {
                 this.serrure.toString());
     }
 
-	protected void setEtat(Etat etat) {
+	public void setEtat(Etat etat) {
         this.etat = etat;
 	}
 }

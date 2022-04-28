@@ -17,6 +17,7 @@ import fr.insarouen.asi.prog.asiaventure.elements.structure.Piece;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.PorteFermeException;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.PorteInexistanteDansLaPieceException;
 import fr.insarouen.asi.prog.asiaventure.elements.structure.VivantAbsentDeLaPieceException;
+import fr.insarouen.asi.prog.asiaventure.elements.structure.Porte;
 /** */
 public class JoueurHumain extends Vivant implements Executable{
     //Attributs
@@ -30,7 +31,7 @@ public class JoueurHumain extends Vivant implements Executable{
     public void setOrdre(String ordre){
         this.ordre=ordre;
     }
-    void commandePrendre(String nomObjet) throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException{
+    void commandePrendre(java.lang.String nomObjet) throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException{
         this.prendre(nomObjet);
     }
     void commandePoser(String nomObjet) throws ObjetNonPossedeParLeVivantException{
@@ -39,11 +40,23 @@ public class JoueurHumain extends Vivant implements Executable{
     void commandeFranchir(String nomPorte) throws PorteInexistanteDansLaPieceException, VivantAbsentDeLaPieceException, PorteFermeException{
         this.franchir(nomPorte);
     }
-    void commandeOuvrirPorte(String nomPorte,String nomObjet) throws PorteInexistanteDansLaPieceException, VivantAbsentDeLaPieceException, PorteFermeException, ActivationImpossibleAvecObjetException, ActivationImpossibleException{
-        this.getPiece().getPorte(nomPorte).activerAvec(this.getObjet(nomObjet));
+    void commandeOuvrirPorte(String nomPorte,String nomObjet) throws ObjetNonPossedeParLeVivantException, PorteInexistanteDansLaPieceException, VivantAbsentDeLaPieceException, PorteFermeException, ActivationImpossibleAvecObjetException, ActivationImpossibleException{
+        Objet objet = this.getObjet(nomObjet);
+        if(objet==null){
+            throw new ObjetNonPossedeParLeVivantException(String.format("Le vivant %s ne possède pas cet objet : %s",this.getNom(),nomObjet));
+        }
+        Porte porte = this.getPiece().getPorte(nomPorte);
+        if (porte == null){
+            throw new PorteInexistanteDansLaPieceException(String.format("La porte %s n'existe pas dans la pièce %s", nomPorte,this.getPiece().getNom()));
+        }
+        porte.activerAvec(objet);
     }
     void commandeOuvrirPorte(String nomPorte) throws ActivationException, PorteInexistanteDansLaPieceException{
-        this.getPiece().getPorte(nomPorte).activer();
+        Porte porte = this.getPiece().getPorte(nomPorte);
+        if(porte==null){
+            throw new PorteInexistanteDansLaPieceException(String.format("La porte %s n'existe pas dans la piece %s",nomPorte,this.getNom()));
+        }
+        porte.activer();
     }
 
     @Override
@@ -53,10 +66,14 @@ public class JoueurHumain extends Vivant implements Executable{
         Class[] typeParametre = new Class[nombreElem];
         Arrays.fill(typeParametre,String.class);
         String[] parametreEffectif = Arrays.copyOfRange(splitOrdre,1,nombreElem);
-        Method method = this.getClass().getMethod("commande"+splitOrdre[0],typeParametre);
-        if(method==null){
-            throw new CommandeImpossiblePourLeVivantException("Introspection n'a pas trouver la méthode");
-        }
+        Method method;
+        // try{
+            method = this.getClass().getDeclaredMethod("commande"+splitOrdre[0],typeParametre);
+        // }
+        // catch(java.lang.NoSuchMethodException e){
+        //     throw new CommandeImpossiblePourLeVivantException("Introspection n'a pas trouver la méthode");
+        // }
+
         try{
             method.invoke(this,(Object[])parametreEffectif);
         }
